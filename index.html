@@ -47,6 +47,10 @@ td.lab{color:var(--gold);font-weight:700}
 .open b{color:var(--gold)}
 .src{border-top:1px solid var(--line);margin-top:26px;padding-top:10px;color:var(--mute);font-size:13px}
 .rider{color:var(--mute);font-size:12px;margin-top:6px}
+.credit{background:var(--gold);color:#1a1a2e;font-weight:800;font-size:22px;line-height:1.25;border-radius:12px;padding:14px 18px;margin:10px 0 16px}
+.credit small{display:block;font-weight:600;font-size:14px;margin-top:3px}
+.credit2{color:var(--text);font-size:13px;margin-top:8px;font-weight:600}
+.refer{color:var(--text);font-size:13px;margin-top:4px}.refer.top{border:1.5px solid var(--gold);border-radius:10px;padding:9px 14px;margin:0 0 16px;font-size:15px}
 .deeper{margin-top:22px}.deeper a,.chip{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;margin:4px 6px 0 0;font-size:14px;color:var(--text)}
 .deeper a b{color:var(--teal);margin-right:6px}
 .pn{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
@@ -79,7 +83,7 @@ mark{background:var(--gold);color:#1a1a2e;border-radius:3px;padding:0 2px}
  th{color:#0b6b62}td{background:#f1f2f8;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  td:first-child,td.lab{color:#8a5a00}
  .steps li{background:#f1f2f8;-webkit-print-color-adjust:exact;print-color-adjust:exact}.steps li:before{color:#8a5a00}.steps b,.card b{color:#0b6b62}
- .card{border-color:#99a}.call{background:#f4b041;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .card{border-color:#99a}.credit2{color:#222;font-size:10.5px}.src .refer{display:none}.src{margin-top:8px}.pnote{border:1.5px solid #c98a00;border-radius:8px;padding:6px 10px;margin:0 0 10px;font-size:11.5px;color:#111}.call{background:#f4b041;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  .open{border-color:#c98a00}.open b{color:#8a5a00}a{color:#0b4f9c}.term{border:0}
  .tools,.pn,.deeper{display:none}
  tr,li,.card,.call,.open{break-inside:avoid}
@@ -1423,7 +1427,10 @@ F Compiled from the "Open or judgment" notes on the pages and the poster check o
 @B-02 | back | About this guide | What it is, where it comes from and what changed.
 T -
 What it is | A study aid built from the KP Master Posters: 49 posters reorganised for a beginner, with a home page, finders, search and pop-ups.
-Edition | Draft v0.1, 20 Nov 2026. A final edition is planned at the end of the Diploma.
+Prepared from | The teachings of Prof. Krish Murali Eswar Sir: his teaching reference material and the knowledge from his case illustrations.
+Prepared with | The support of Claude AI, which helped compile, check and lay out the pages.
+Accuracy | Prepared as accurately as possible. For the full reference, case studies and FAQs, always refer to https://www.kpastro.ai/.
+Edition | Draft v0.3, 20 Nov 2026. A final edition is planned at the end of the Diploma.
 Sources | Prof. Krish Murali Eswar's class decks and digests, the Prashna cheat sheet, the TFU Toolkit, and the faculty's rulings of 11–19 Nov 2026, as cited at the foot of each page.
 Not a source of truth | The class material is. Where this guide and the class differ, the class wins.
 New pages | Home, the chart checklist [[C-01]], the worked example [[C-08]], the equation finder [[E-01]] and the open points register [[B-01]]. They add navigation and one deck example; no new rule.
@@ -1443,7 +1450,10 @@ F Poster check and change note of 20 Nov 2026.
 </script>
 <script>
 (function(){
-var VERSION='Draft v0.1 · 20 Nov 2026';
+var VERSION='Draft v0.3 · 20 Nov 2026';
+var REFER='These pages are prepared as accurately as possible. For the full reference, case studies and FAQs, always refer to <a href="https://www.kpastro.ai/" target="_blank" rel="noopener">https://www.kpastro.ai/</a>.';
+var CREDIT_TOP='Prepared from the teachings of Prof. Krish Murali Eswar Sir';
+var CREDIT='Prepared from Sir\'s teaching reference material and the knowledge from Sir\'s case illustrations. Compiled with the support of Claude AI.';
 var RIDER='For educational purposes only — not a definitive prediction. For an actual prediction, consult Prof. Krish Murali Eswar, or a well-known, experienced KP astrologer.';
 var GROUPS=[['learn','Learn in order'],['chart','Read a chart'],['prashna','Prashna'],['ask','Find a question'],['deep','Deep dives'],['back','Back matter']];
 var GNAME={};GROUPS.forEach(function(g){GNAME[g[0]]=g[1]});
@@ -1527,7 +1537,7 @@ function body(p){
   else if(b.t==='P')h+='<p>'+inline(b.x,seen)+'</p>';
   else if(b.t==='C')h+='<div class="call">'+inline(b.x,null)+'</div>';
   else if(b.t==='O')h+='<div class="open"><b>Open or judgment:</b> '+inline(b.x,seen)+'</div>';
-  else if(b.t==='F')h+='<div class="src">From the notes: '+inline(b.x,null)+'<div class="rider">'+VERSION+' · '+RIDER+'</div></div>';
+  else if(b.t==='F')h+='<div class="src">From the notes: '+inline(b.x,null)+'<div class="credit2">'+CREDIT+'</div><div class="refer">'+REFER+'</div><div class="rider">'+VERSION+' · '+RIDER+'</div></div>';
   else if(b.t==='T'){
    var pair=b.h&&b.h.length===4&&b.h[0]===b.h[2];
    h+='<table>'+(b.h?'<tr>'+b.h.map(function(c){return '<th>'+esc(c)+'</th>'}).join('')+'</tr>':'');
@@ -1549,7 +1559,7 @@ function pageHtml(p){
  return h;
 }
 function homeHtml(){
- var h='<div class="kick">KP Master Guide · '+VERSION+'</div><h1>Where do you want to start?</h1><p class="sub">A beginner\'s guide to reading a KP chart, built from the class posters. Search above, or pick a door.</p>';
+ var h='<div class="kick">KP Master Guide · '+VERSION+'</div><div class="credit">'+CREDIT_TOP+'<small>With the support of Claude AI</small></div><div class="refer top">'+REFER+'</div><h1>Where do you want to start?</h1><p class="sub">A beginner\'s guide to reading a KP chart, built from the class posters. Search above, or pick a door.</p>';
  h+='<div class="doors"><a class="door" href="#L-01"><b>I am new</b><span>Learn in order. Start with the words, then the lords, houses, orb and the chain.</span></a>'+
  '<a class="door" href="#C-01"><b>I have a chart</b><span>The checklist, the promise gate and one worked example, start to verdict.</span></a>'+
  '<a class="door" href="#Q-00"><b>I have a question</b><span>Will I marry? Will I get a job? Find the cusp and its yes and no houses.</span></a>'+
@@ -1557,7 +1567,7 @@ function homeHtml(){
  '<a class="door" href="#P-01"><b>I have a Prashna</b><span>The eleven steps, rotation, genuineness and the re-ask rule.</span></a>'+
  '<a class="door" href="#B-01"><b>What is still open?</b><span>Every unsettled point in one register.</span></a></div>';
  GROUPS.forEach(function(g){h+='<h2>'+g[1]+'</h2><div>'+pages.filter(function(p){return p.g===g[0]}).map(function(p){return '<a class="chip" href="#'+p.id+'"><b style="color:var(--teal);margin-right:6px">'+p.id+'</b>'+esc(p.title.split(':')[0])+'</a>'}).join('')+'</div>'});
- h+='<div class="src">'+pages.length+' pages. Tap a dotted word for its meaning. Each page can be downloaded alone or with the pages it leads to.<div class="rider">'+RIDER+'</div></div>';
+ h+='<div class="src">'+pages.length+' pages. Tap a dotted word for its meaning. Each page can be downloaded alone or with the pages it leads to.<div class="credit2">'+CREDIT+'</div><div class="refer">'+REFER+'</div><div class="rider">'+RIDER+'</div></div>';
  return h;
 }
 // ---------- search ----------
@@ -1591,7 +1601,7 @@ window.addEventListener('hashchange',function(){q.value='';show()});
 q.addEventListener('input',function(){var v=q.value.trim();if(v.length>1){main.innerHTML=searchHtml(v);pop.style.display='none'}else show()});
 document.getElementById('menuBtn').addEventListener('click',function(){nav.classList.toggle('show')});
 function doPrint(ids){
- pr.innerHTML=ids.map(function(id){var p=byId[id];return '<div class="pg">'+head(p)+body(p)+'</div>'}).join('');
+ pr.innerHTML=ids.map(function(id){var p=byId[id];return '<div class="pg"><div class="pnote"><b>'+CREDIT_TOP+'.</b> '+REFER+'</div>'+head(p)+body(p)+'</div>'}).join('');
  var old=document.title;document.title='KP-Guide-'+ids[0]+(ids.length>1?'-flow':'');
  setTimeout(function(){window.print();document.title=old},50);
 }

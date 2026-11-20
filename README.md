@@ -1,8 +1,10 @@
 # KP Master Guide (draft)
 
+**Prepared from the teachings of Prof. Krish Murali Eswar Sir.**
+
 A beginner's study guide to reading a KP chart, built from the KP Master Posters.
 
-**Edition:** Draft v0.1, 20 Nov 2026. A final edition is planned at the end of the Diploma.
+**Edition:** Draft v0.3, 20 Nov 2026. A final edition is planned at the end of the Diploma.
 
 ## What is here
 
@@ -24,6 +26,15 @@ A beginner's study guide to reading a KP chart, built from the KP Master Posters
 ## How to update
 
 Upload a new `index.html` over the old one. The site refreshes on its own in a minute or two.
+
+## Credits
+
+- Prepared from Sir's teaching reference material and the knowledge from Sir's case illustrations.
+- Compiled with the support of Claude AI.
+
+## Accuracy
+
+These pages are prepared as accurately as possible. For the full reference, case studies and FAQs, always refer to https://www.kpastro.ai/. This applies especially to any page you print or pass on.
 
 ## Notes
 
