@@ -13,7 +13,9 @@ button{font:inherit;cursor:pointer}
 #top .brand small{color:var(--gold);font-weight:700;letter-spacing:.08em;margin-left:6px}
 #q{flex:1;min-width:0;padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:inherit}
 #q::placeholder{color:var(--mute)}
-#menuBtn{display:none;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+.tb{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px;white-space:nowrap;line-height:1.2}.tb:hover{border-color:var(--teal);text-decoration:none}
+#menuBtn{display:none}.quick{display:flex;gap:8px}
+#topBtn{position:fixed;right:16px;bottom:18px;z-index:30;display:none;background:var(--gold);color:#1a1a2e;border:0;border-radius:999px;padding:10px 14px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.45)}
 #wrap{display:flex;align-items:flex-start}
 #nav{width:280px;flex:none;position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto;padding:14px 10px 40px;border-right:1px solid var(--line)}
 #nav h4{margin:16px 8px 6px;color:var(--gold);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
@@ -67,9 +69,10 @@ td.lab{color:var(--gold);font-weight:700}
 .hit b{color:var(--teal);margin-right:8px}.hit small{display:block;color:var(--mute)}
 mark{background:var(--gold);color:#1a1a2e;border-radius:3px;padding:0 2px}
 #print{display:none}
-@media(max-width:860px){#menuBtn{display:block}#nav{position:fixed;left:0;top:57px;background:var(--bg);z-index:15;transform:translateX(-100%);transition:transform .2s;width:86%;max-width:320px}#nav.show{transform:none}#main{padding:18px 14px 70px}h1{font-size:28px}td,th{padding:8px 8px;font-size:14.5px}#top .brand small{display:none}}
+@media(max-width:1100px){.quick{display:none}}
+@media(max-width:860px){#menuBtn{display:block}#top{gap:6px;padding:8px}#top .brand{display:none}.tb{padding:8px 9px}#nav{position:fixed;left:0;top:57px;background:var(--bg);z-index:15;transform:translateX(-100%);transition:transform .2s;width:86%;max-width:320px}#nav.show{transform:none}#main{padding:18px 14px 70px}h1{font-size:28px}td,th{padding:8px 8px;font-size:14.5px}#top .brand small{display:none}}
 @media print{
- #top,#nav,#main,#pop{display:none!important}
+ #top,#nav,#main,#pop,#topBtn{display:none!important}
  #print{display:block}
  html,body{background:#fff;color:#111;font-size:12.5px;line-height:1.4}
  h1{font-size:25px;margin:3px 0 4px}.sub{font-size:14px;margin:0 0 8px}h2{font-size:16px;margin:12px 0 4px}p{margin:6px 0}
@@ -89,9 +92,9 @@ mark{background:var(--gold);color:#1a1a2e;border-radius:3px;padding:0 2px}
  tr,li,.card,.call,.open{break-inside:avoid}
 }
 </style></head><body>
-<div id="top"><button id="menuBtn" aria-label="Menu">☰</button><a class="brand" href="#home">KP Master Guide<small>DRAFT</small></a><input id="q" type="search" placeholder="Search: 7 = 6, Punarpoo, visa, Badhaka…" autocomplete="off"></div>
+<div id="top"><button id="menuBtn" class="tb" aria-label="Menu">☰</button><button id="backBtn" class="tb" title="Back to the page you were on">← Back</button><a id="homeBtn" class="tb" href="#home" title="Home page">⌂ Home</a><a class="brand" href="#home">KP Master Guide<small>DRAFT</small></a><input id="q" type="search" placeholder="Search: 7 = 6, Punarpoo, visa, Badhaka…" autocomplete="off"><span class="quick"><a class="tb" href="#Q-00">Questions</a><a class="tb" href="#E-01">Equations</a><a class="tb" href="#L-01">Glossary</a></span></div>
 <div id="wrap"><nav id="nav"></nav><main id="main"></main></div>
-<div id="pop"></div><div id="print"></div>
+<button id="topBtn" title="Back to the top of this page">↑ Top</button><div id="pop"></div><div id="print"></div>
 <script type="text/plain" id="src">
 @L-01 | learn | Glossary 1: the chart and the chain | The words you need before you can state a single equation.
 T Term | Meaning
@@ -1430,7 +1433,7 @@ What it is | A study aid built from the KP Master Posters: 49 posters reorganise
 Prepared from | The teachings of Prof. Krish Murali Eswar Sir: his teaching reference material and the knowledge from his case illustrations.
 Prepared with | The support of Claude AI, which helped compile, check and lay out the pages.
 Accuracy | Prepared as accurately as possible. For the full reference, case studies and FAQs, always refer to https://www.kpastro.ai/.
-Edition | Draft v0.3, 20 Nov 2026. A final edition is planned at the end of the Diploma.
+Edition | Draft v0.4, 20 Nov 2026. A final edition is planned at the end of the Diploma.
 Sources | Prof. Krish Murali Eswar's class decks and digests, the Prashna cheat sheet, the TFU Toolkit, and the faculty's rulings of 11–19 Nov 2026, as cited at the foot of each page.
 Not a source of truth | The class material is. Where this guide and the class differ, the class wins.
 New pages | Home, the chart checklist [[C-01]], the worked example [[C-08]], the equation finder [[E-01]] and the open points register [[B-01]]. They add navigation and one deck example; no new rule.
@@ -1450,7 +1453,7 @@ F Poster check and change note of 20 Nov 2026.
 </script>
 <script>
 (function(){
-var VERSION='Draft v0.3 · 20 Nov 2026';
+var VERSION='Draft v0.4 · 20 Nov 2026';
 var REFER='These pages are prepared as accurately as possible. For the full reference, case studies and FAQs, always refer to <a href="https://www.kpastro.ai/" target="_blank" rel="noopener">https://www.kpastro.ai/</a>.';
 var CREDIT_TOP='Prepared from the teachings of Prof. Krish Murali Eswar Sir';
 var CREDIT='Prepared from Sir\'s teaching reference material and the knowledge from Sir\'s case illustrations. Compiled with the support of Claude AI.';
@@ -1553,7 +1556,7 @@ function head(p){return '<div class="kick">'+esc(GNAME[p.g])+' · '+p.id+'</div>
 function flowIds(p){var out=[p.id];p.flow.forEach(function(f){if(byId[f]&&out.indexOf(f)<0)out.push(f)});return out}
 function pageHtml(p){
  var i=ORDER.indexOf(p.id),pv=byId[ORDER[i-1]],nx=byId[ORDER[i+1]],fl=flowIds(p).slice(1);
- var h=head(p)+'<div class="tools"><button data-act="page">Download this page</button>'+(fl.length?'<button data-act="flow">Download this flow ('+(fl.length+1)+' pages)</button>':'')+'<button data-act="link">Copy link</button></div>'+body(p);
+ var h=head(p)+'<div class="tools">'+(pv?'<button data-go="'+pv.id+'" title="'+esc(pv.title)+'">‹ Previous</button>':'')+(nx?'<button data-go="'+nx.id+'" title="'+esc(nx.title)+'">Next ›</button>':'')+'<button data-act="page">Download this page</button>'+(fl.length?'<button data-act="flow">Download this flow ('+(fl.length+1)+' pages)</button>':'')+'<button data-act="link">Share this page</button></div>'+body(p);
  if(fl.length)h+='<div class="deeper"><b>Go deeper from here:</b><br>'+fl.map(function(f){return '<a href="#'+f+'"><b>'+f+'</b>'+esc(byId[f].title)+'</a>'}).join('')+'</div>';
  h+='<div class="pn">'+(pv?'<a class="chip" href="#'+pv.id+'">← '+pv.id+' '+esc(pv.title.split(':')[0])+'</a>':'<span></span>')+(nx?'<a class="chip" href="#'+nx.id+'">'+nx.id+' '+esc(nx.title.split(':')[0])+' →</a>':'<span></span>')+'</div>';
  return h;
@@ -1610,9 +1613,14 @@ document.addEventListener('click',function(e){
  if(t.getAttribute&&t.getAttribute('data-act')&&cur){
   var a=t.getAttribute('data-act');
   if(a==='page')doPrint([cur.id]);else if(a==='flow')doPrint(flowIds(cur));
-  else if(a==='link'){var u=location.href;try{navigator.clipboard.writeText(u).then(function(){t.textContent='Link copied'},function(){window.prompt('Copy this link',u)})}catch(x){window.prompt('Copy this link',u)}}
+  else if(a==='link'){var u=location.href,ttl=cur.id+' '+cur.title+' · KP Master Guide';
+   var copy=function(){try{navigator.clipboard.writeText(u).then(function(){t.textContent='Link copied'},function(){window.prompt('Copy this link',u)})}catch(x){window.prompt('Copy this link',u)}};
+   if(navigator.share){navigator.share({title:ttl,text:ttl,url:u}).catch(function(){})}else copy();}
   return;
  }
+ if(t.getAttribute&&t.getAttribute('data-go')){location.hash=t.getAttribute('data-go');return}
+ if(t.id==='backBtn'){if(q.value){q.value='';show()}else if(window.history.length>1&&cur){window.history.back()}else{location.hash='home'}return}
+ if(t.id==='topBtn'){window.scrollTo(0,0);return}
  if(t.classList&&t.classList.contains('term')){
   var k=t.getAttribute('data-t'),r=t.getBoundingClientRect();
   pop.innerHTML='<b>'+esc(k)+'</b>'+esc(TDEF[k]||'')+'<br><a href="#L-01">Open the glossary</a>';
@@ -1622,6 +1630,7 @@ document.addEventListener('click',function(e){
  }
  if(!pop.contains(t))pop.style.display='none';
 });
+var topBtn=document.getElementById('topBtn');window.addEventListener('scroll',function(){topBtn.style.display=window.scrollY>500?'block':'none'});
 show();
 })();
 </script></body></html>

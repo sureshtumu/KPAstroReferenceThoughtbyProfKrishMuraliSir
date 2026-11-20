@@ -4,7 +4,7 @@
 
 A beginner's study guide to reading a KP chart, built from the KP Master Posters.
 
-**Edition:** Draft v0.3, 20 Nov 2026. A final edition is planned at the end of the Diploma.
+**Edition:** Draft v0.4, 20 Nov 2026. A final edition is planned at the end of the Diploma.
 
 ## What is here
 
