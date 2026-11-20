@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KP Master Guide (draft)</title>
+<style>
+:root{--bg:#14183a;--panel:#1d2452;--panel2:#232b5e;--line:#39428a;--gold:#f4b041;--teal:#6fd3c7;--text:#f4efe6;--mute:#b4b8d8}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+button{font:inherit;cursor:pointer}
+#top{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:10px 14px;background:#10142f;border-bottom:1px solid var(--line)}
+#top .brand{font-weight:800;color:var(--text);white-space:nowrap}
+#top .brand small{color:var(--gold);font-weight:700;letter-spacing:.08em;margin-left:6px}
+#q{flex:1;min-width:0;padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:inherit}
+#q::placeholder{color:var(--mute)}
+#menuBtn{display:none;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+#wrap{display:flex;align-items:flex-start}
+#nav{width:280px;flex:none;position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto;padding:14px 10px 40px;border-right:1px solid var(--line)}
+#nav h4{margin:16px 8px 6px;color:var(--gold);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+#nav a{display:block;padding:5px 8px;border-radius:7px;color:var(--mute);font-size:14px}
+#nav a b{color:var(--teal);font-weight:600;margin-right:6px;font-size:12px}
+#nav a.on{background:var(--panel2);color:var(--text)}
+#main{flex:1;min-width:0;padding:26px 30px 80px;max-width:1000px}
+.kick{color:var(--gold);font-weight:700;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+h1{font-size:36px;line-height:1.12;margin:6px 0 8px;font-weight:800}
+.sub{color:var(--mute);font-size:18px;margin:0 0 18px}
+h2{font-size:22px;margin:24px 0 10px}
+p{margin:10px 0}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.tools button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:7px 12px;font-size:14px}
+.tools button:hover{border-color:var(--teal)}
+table{width:100%;border-collapse:separate;border-spacing:0 6px;margin:6px 0 10px}
+th{text-align:left;color:var(--teal);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:2px 12px;font-weight:700}
+td{background:var(--panel);padding:9px 12px;vertical-align:top}
+td:first-child{border-radius:9px 0 0 9px;color:var(--gold);font-weight:700}
+td:last-child{border-radius:0 9px 9px 0}
+td.lab{color:var(--gold);font-weight:700}
+.steps{counter-reset:s;list-style:none;padding:0;margin:6px 0 10px}
+.steps li{counter-increment:s;background:var(--panel);border-radius:9px;margin:6px 0;padding:10px 12px 10px 52px;position:relative}
+.steps li:before{content:counter(s);position:absolute;left:16px;top:8px;color:var(--gold);font-weight:800;font-size:19px}
+.steps b{color:var(--teal)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:8px 0 12px}
+.card{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.card b{display:block;color:var(--teal);font-size:17px;margin-bottom:2px}
+.call{background:var(--gold);color:#1a1a2e;font-weight:800;border-radius:12px;padding:14px 16px;margin:14px 0;font-size:18px}
+.open{border:1.5px dashed var(--gold);border-radius:12px;padding:11px 14px;margin:12px 0;font-size:15px}
+.open b{color:var(--gold)}
+.src{border-top:1px solid var(--line);margin-top:26px;padding-top:10px;color:var(--mute);font-size:13px}
+.rider{color:var(--mute);font-size:12px;margin-top:6px}
+.deeper{margin-top:22px}.deeper a,.chip{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;margin:4px 6px 0 0;font-size:14px;color:var(--text)}
+.deeper a b{color:var(--teal);margin-right:6px}
+.pn{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.term{border-bottom:1px dotted var(--teal);cursor:help}
+#pop{position:absolute;z-index:50;max-width:320px;background:#fff;color:#1a1a2e;border-radius:10px;padding:10px 12px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.5);display:none}
+#pop b{display:block;margin-bottom:2px}
+#pop a{color:#1a56a8;font-size:13px}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:14px 0 6px}
+.door{display:block;border:1.5px solid var(--line);border-radius:14px;padding:16px;color:var(--text);background:var(--panel)}
+.door:hover{border-color:var(--teal);text-decoration:none}
+.door b{display:block;color:var(--gold);font-size:19px;margin-bottom:4px}
+.door span{color:var(--mute);font-size:15px}
+.hit{display:block;background:var(--panel);border-radius:10px;padding:10px 12px;margin:8px 0;color:var(--text)}
+.hit b{color:var(--teal);margin-right:8px}.hit small{display:block;color:var(--mute)}
+mark{background:var(--gold);color:#1a1a2e;border-radius:3px;padding:0 2px}
+#print{display:none}
+@media(max-width:860px){#menuBtn{display:block}#nav{position:fixed;left:0;top:57px;background:var(--bg);z-index:15;transform:translateX(-100%);transition:transform .2s;width:86%;max-width:320px}#nav.show{transform:none}#main{padding:18px 14px 70px}h1{font-size:28px}td,th{padding:8px 8px;font-size:14.5px}#top .brand small{display:none}}
+@media print{
+ #top,#nav,#main,#pop{display:none!important}
+ #print{display:block}
+ html,body{background:#fff;color:#111;font-size:12.5px;line-height:1.4}
+ h1{font-size:25px;margin:3px 0 4px}.sub{font-size:14px;margin:0 0 8px}h2{font-size:16px;margin:12px 0 4px}p{margin:6px 0}
+ table{border-spacing:0 3px;margin:3px 0 5px}td{padding:5px 9px}th{font-size:10px;padding:1px 9px}
+ .steps li{margin:3px 0;padding:6px 9px 6px 38px}.steps li:before{font-size:14px;top:5px;left:12px}
+ .cards{gap:6px;margin:5px 0 7px}.card{padding:7px 10px}.card b{font-size:13.5px}
+ .call{font-size:14px;padding:8px 12px;margin:8px 0}.open{font-size:12px;padding:7px 10px;margin:7px 0}.src{margin-top:12px;padding-top:6px;font-size:10.5px}.rider{font-size:10px}
+ @page{size:A4;margin:12mm}
+ .pg{page-break-after:always;padding:0 4px}.pg:last-child{page-break-after:auto}
+ .kick{color:#9a6400}.sub,.src,.rider{color:#444}
+ th{color:#0b6b62}td{background:#f1f2f8;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ td:first-child,td.lab{color:#8a5a00}
+ .steps li{background:#f1f2f8;-webkit-print-color-adjust:exact;print-color-adjust:exact}.steps li:before{color:#8a5a00}.steps b,.card b{color:#0b6b62}
+ .card{border-color:#99a}.call{background:#f4b041;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .open{border-color:#c98a00}.open b{color:#8a5a00}a{color:#0b4f9c}.term{border:0}
+ .tools,.pn,.deeper{display:none}
+ tr,li,.card,.call,.open{break-inside:avoid}
+}
+</style></head><body>
+<div id="top"><button id="menuBtn" aria-label="Menu">☰</button><a class="brand" href="#home">KP Master Guide<small>DRAFT</small></a><input id="q" type="search" placeholder="Search: 7 = 6, Punarpoo, visa, Badhaka…" autocomplete="off"></div>
+<div id="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<div id="pop"></div><div id="print"></div>
+<script type="text/plain" id="src">
+@L-01 | learn | Glossary 1: the chart and the chain | The words you need before you can state a single equation.
+T Term | Meaning
+Cusp | The starting point of a house. Its "main door".
+CSL | Cuspal Sub Lord: the sub lord of a cusp. The gate for that house's matters.
+Primary cusp | The one cusp that answers the question.
+Star lord | The lord of the star a planet sits in. The planet gives its star lord's results.
+Sub lord | The lord of the sub a planet or cusp sits in. It qualifies and shows nature.
+Deposition | The house a planet occupies, after applying the orb.
+Ownership | The houses whose cusps fall in the planet's signs. Rahu and Ketu own none.
+Orb | The planet's reach: Sun 6°40′, others 3°20′.
+Conjoined, opposing | Planets linked within the orb, in the same or the opposite sign and house.
+Significator | A planet that signifies a house through its ABCD.
+ABCD | Star lord's deposition, own deposition, star lord's ownership, own ownership.
+L1 to L4 | Strength levels of a planet for a house, used for periods.
+Tenanted | Some planet sits in one of this planet's three stars. Untenanted: none does.
+Equation | The CSL's result written as "house = deposition (ownership)".
+Standard, derived | The equation from the star lord alone, and with conjoined and opposing planets added.
+Promise | What the CSL's chain allows. Without it, no period gives the event.
+Displaced cusps | Two cusps in one sign, so one sign lord owns two houses.
+
+F Compiled from the foundations digests, the orb rule, Bootcamp Class 10 and the Prashna cheat sheet.
+> L-02 L-03
+
+@L-02 | learn | Glossary 2: checks, periods and timing | The words that come up once the equation is written.
+T Term | Meaning
+Improving houses | 1, 2, 3, 6, 10, 11.
+Afflicted | Activating 6, 8 or 12.
+Benefic, malefic | By the house of the planet's sub lord. For periods only.
+Barren signs | Aries, Gemini, Leo, Virgo.
+Fruitful star | A star whose lord signifies the matter's good houses. Used for the Sun–Moon timing table.
+Maraka | Houses 2 and 7.
+Badhaka | 11th, 9th or 7th, for a movable, fixed or dual Lagna.
+Punarpoo | A Moon–Saturn link that delays marriage until about 33 unless the Sun cancels it.
+Oddity | An out-of-the-ordinary love or marriage, shown by Saturn on the CSL.
+Duality | A Mercury or Jupiter signature on the CSL. Needed for a second marriage.
+Rotation | Turning the chart so a relative's house becomes the 1st.
+Genuineness | Whether the Prashna Moon reflects the question.
+Horary number | A random number from 1 to 249 that fixes the Lagna.
+DBAS | Dasa, Bhukti, Antara, Sukshma.
+Ruling Planets | The seven lords of the moment of judgement. For timing only.
+Fortuna | Lagna + Moon − Sun. Used to choose a good day.
+BTR | Birth-time rectification.
+KPDP | The ten-step marriage-matching method.
+Prediction Analysis | The app's chain view for a cusp. Read it in the app's order.
+
+F Compiled from the class digests, the Prashna cheat sheet and the Ruling Planets source of truth.
+> L-01 L-03
+
+@L-03 | learn | What makes KP different | Hold these first. Every later rule rests on them.
+C Planets propose. The Cuspal Sub Lord disposes. The Dasha delivers.
+K
+Unequal houses :: KP uses Placidus cusps. A house can be more or less than 30°, and two cusps can fall in one sign.
+The star is supreme :: A planet is the tenant of its star. It gives the results of its star lord.
+The sub lord decides :: KSK found the sub lord to explain twins. The sub lord of the primary cusp promises or denies the event.
+No planet is good or bad :: Rahu or Saturn can give the best results, Jupiter the worst. Only the chart decides.
+The chart is a photograph :: It is not a movie. Retrograde never reverses the orb.
+Deposition beats ownership :: Where a planet sits matters more than what it owns.
+
+# What KP does not use
+T -
+Exaltation, debilitation | Ignored entirely. No dignity ladder.
+"Combust" | There is no such word. A planet near the Sun is simply conjunct the Sun.
+Sade Sati | Rejected. Trouble is timed by the karma the planets activate.
+Gochara | Not used. Transits serve only to time a promised event.
+Sign lord as significator | Never. The sign shows only nature.
+Uranus, Neptune, Pluto | Ignored.
+
+F Classes 001–002 foundations, Class 004, Class 007, Bootcamp Class 10, Prashna cheat sheet.
+> L-04 L-05 L-06
+
+@L-04 | learn | Sign, star, sub: three lords for every degree | Every point in the sky has one sign lord, one star lord and one sub lord.
+K
+12 signs :: 30° each. Lord = the sign owner.
+27 stars :: 13°20′ each. Lord = the star lord.
+249 subs :: Each star is cut into 9 unequal subs.
+
+# How wide each sub is
+P The subs follow the Vimshottari order and its proportions, starting from the star lord itself. The dasha years are the same proportions.
+T Sub lord | Width in a star | Dasha years
+Ketu | 0°46′40″ | 7
+Venus | 2°13′20″ | 20
+Sun | 0°40′00″ | 6
+Moon | 1°06′40″ | 10
+Mars | 0°46′40″ | 7
+Rahu | 2°00′00″ | 18
+Jupiter | 1°46′40″ | 16
+Saturn | 2°06′40″ | 19
+Mercury | 1°53′20″ | 17
+
+# Why 249 and not 243
+T -
+243 | 27 stars × 9 subs.
++ 3 | Rahu's sub spans two signs in the three Sun-ruled stars: Krittika, Uttara Phalguni, Uttara Ashadha.
++ 3 | Moon's sub spans two signs in the three Jupiter-ruled stars: Punarvasu, Vishakha, Purva Bhadrapada.
+
+P The first sub in any star belongs to the star lord. A horary number from 1 to 249 names one of these subs and fixes the Lagna.
+F Class 004 (249 derivation), Class 007 (Vimshottari). Sub widths are 13°20′ × years ÷ 120.
+> L-13
+
+@L-05 | learn | What a sign tells you | The sign is read only for nature: modality, element, barren or not, duality.
+# Modality, and the Badhaka house it sets
+T Modality | Signs | Badhaka
+Movable (Chara) | Aries, Cancer, Libra, Capricorn | 11th
+Fixed (Sthira) | Taurus, Leo, Scorpio, Aquarius | 9th
+Dual (Ubhaya) | Gemini, Virgo, Sagittarius, Pisces | 7th
+
+P Remember only that Aries is movable. The order then cycles movable, fixed, dual.
+# Element
+T -
+Fire | Aries, Leo, Sagittarius
+Land (earth) | Taurus, Virgo, Capricorn
+Air | Gemini, Libra, Aquarius
+Water | Cancer, Scorpio, Pisces
+
+# Barren signs
+C Aries, Gemini, Leo, Virgo are barren. All other signs can give.
+P Barren signs matter for marriage and childbirth. If the CSL and its star lord are both in barren signs, the matter is denied.
+# Fixed for every chart
+T -
+Maraka houses | 2 and 7.
+Dual Lagna | The 7th is Badhaka, so the effective Maraka is the 2nd only.
+
+F Class 008 (modality, Badhaka, Maraka), Prashna cheat sheet step 8 (barren signs), Classes 001–002.
+> P-04 D-06
+
+@L-06 | learn | Twelve cusps: what each CSL answers | Pick the cusp from the question. Its sub lord is the CSL you read.
+T CSL | Read it for
+1st | Longevity, immunity, personality, personal luck and success
+2nd | Rich or poor, assets, wealth, speech, family
+3rd | Mindset, memory, competitive exams, short travel, younger sibling, father-in-law
+4th | Mother, school education, property, vehicle, homeland
+5th | Love, first child (for the mother), speculation, addiction, mantra, arts, sports, cure
+6th | Job, earned income, labour, and also disease. A dual house
+7th | Legal marriage, spouse, business partner, client, boss, known enemies
+8th | Difficulties, losses, sudden events, accidents, diagnosis, inheritance, insurance
+9th | Father, guru, higher education, wisdom, occult study, long travel
+10th | Profession, name and fame, power, promotion, government, mother-in-law
+11th | Fulfilment, success, incremental income, elder sibling, friends, well-wishers
+12th | Foreign travel, hospitalisation, court case, hidden enemies, heavy losses, investments
+
+P Travel by distance: under 30 miles is the 3rd, 30 to 300 the 9th, over 300 the 12th.
+F Class 005, per-house CSL significations.
+> L-07 Q-00
+
+@L-07 | learn | House groups you must know cold | A matter is promised when the CSL connects to its favourable group.
+K
+Improving :: 1, 2, 3, 6, 10, 11
+Non-improving :: 4, 5, 7, 8, 9, 12
+Afflicted :: 6, 8, 12
+
+T Matter | Favourable houses
+Income | 2, 3, 6, 10, 11 (2, 6, 11 most important)
+Disease | 6, 8, 12
+Cure | 5, 11 (plus 3 and 9 for prevention and control)
+Marriage | 2, 7, 11
+Childbirth | 2, 5, 11
+Travel | 3, 9, 12
+House | 2, 4, 11
+Vehicle | 2, 4, 9, 11
+
+# Three things to say about 6, 8 and 12
+T -
+6 is dual | It is both an income house and a disease house. Decide by the matter.
+Self-exception | 12 = 12 promises foreign travel. 8 = 8 favours inheritance.
+Scope | A reading holds only for the matter judged. The same house is good for one question and bad for another.
+
+# The 5th is a maximiser
+P 5 with 2, 3, 6, 10, 11 gives huge wealth. 5 with 8, 9, 12 gives huge poverty.
+O Counted from the 7th, the improving set flips to favour the opponent. 6 is not improving for marriage, and 4 is not for childbirth. These come from the older playbook layer.
+O The house and vehicle rows here are the Class 005 quick map. The Prashna table in [[Q-00]] lists house 2, 4, 6, 11 and vehicle 2, 4, 6, 9, 11. See [[B-01]].
+F Class 005 (house groups, doctrines), Bootcamp Class 10 (5th house), prediction framework section 5.
+> Q-00 B-01
+
+@L-08 | learn | The orb: which house a planet really gives | A planet rings the door of the next house if its orb reaches that cusp.
+K
+Sun :: Orb 6°40′
+Every other planet :: Orb 3°20′
+
+# The deposition test, in order
+S
+Count. :: House H is the last cusp at or before the planet. A planet exactly on a cusp gives that house.
+Look ahead. :: Find the next cusp forward, H + 1.
+Sign wall. :: If that cusp is not in the planet's own sign, the planet gives H. Stop.
+Gap. :: Cusp degree minus planet degree.
+Compare. :: Gap within the orb gives H + 1. A gap exactly equal to the orb counts as within.
+Tiny house. :: If the cusp after that is in the same sign, repeat. The planet gives the farthest cusp it reaches.
+
+# Edge rules
+T -
+Forward only | Add the orb clockwise. Never subtract. A cusp behind the planet does nothing.
+Retrograde | Makes no difference to the orb.
+Vacant sign | No cusp in the planet's sign means no orb. It gives the house that began earlier.
+
+P Example. Sun at Leo 17°57′, 6th cusp at Leo 19°55′. Sun + 6°40′ reaches the cusp, so the Sun is in the 6th.
+P In practice you read the app's "Occupies" column and the ABCD grid. They already apply the orb.
+F Orb rule source of truth, sections 1, 2 and 2A.
+> L-09
+
+@L-09 | learn | Conjunction and opposition | A planet joined or opposed by another picks up that planet's results.
+# Conjunction needs all three
+S
+Same sign. :: Two planets in different signs are never conjunct, even 1° apart.
+Same house, with no cusp between them. :: Count from the cusps here. The deposition orb is not used for this.
+Gap within the orb :: of the planet that reaches out.
+
+# Opposition
+P Opposite signs, opposite houses, and within 180° plus or minus the orb. Rahu and Ketu are always opposite each other.
+# The Sun ladder
+T Sun to planet gap | Result
+Up to 3°20′ | Two-way link
+Over 3°20′, up to 6°40′ | One-way: the Sun reaches the planet, not the reverse
+Over 6°40′ | None
+
+# Things to say correctly
+T -
+Whose orb | The orb belongs to the planet that reaches out. Test both directions.
+The door | A cusp is a main door. Two planets can shake hands only if no door stands between them.
+Retrograde | A retrograde planet is tested exactly like a direct one.
+Why it matters | The ABCD grid does not carry this layer. Leaving it out gives wrong significators.
+
+F Orb rule source of truth, sections 3 and 3A (Bootcamp Class 4).
+> L-10 L-11
+
+@L-10 | learn | ABCD and L1 to L4 | Two ways of listing the houses a planet signifies.
+# ABCD: the planet and its star lord
+T Level | Meaning | Strength
+A | Star lord's deposition | Strongest
+B | The planet's own deposition |
+C | Star lord's ownership |
+D | The planet's own ownership | Weakest
+
+P Notation. Deposition first, ownership in brackets. Rahu in Dhanishta, star lord Mars in 12 owning 5, Rahu itself in 8: Rahu = 12, 8, [5].
+# L1 to L4: adds the sub, conjoined and opposing lords
+T -
+L1 | A star, sub, conjoined or opposing lord is deposited in the house. Very strong.
+L2 | The planet itself is deposited there. Good.
+L3 | One of those lords owns the house.
+L4 | The planet itself owns the house. Weakest.
+
+P Each house is shown once, at its strongest level. A planet in its own star shows L1.
+C Strength is for judging periods. It is not used to judge the promise.
+P Untenanted means no planet sits in any of the planet's three stars.
+O The exact ranking order inside L1 to L4 is fitted from the app's table and is not confirmed by Sir. The doctrine is "all deposition first, then ownership".
+F Class 004 (ABCD), Bootcamp Class 10 sections 3.2 and 3.9, L1–L4 ranking rules file.
+> L-11 C-04
+
+@L-11 | learn | Reading a CSL: follow the star lord | The CSL never gives its own houses. It speaks through its chain.
+T Link in the chain | Power | How to use it
+Star lord's deposition | Supreme | The headline. Nothing can deny it.
+Star lord's ownership | Enhances | Adds to the headline. Ownership never denies.
+Planets conjoined with or opposing the CSL or its star lord | Interfere | Each passes on to its own star lord, whose result comes more strongly than its own.
+The CSL's sub lord | Qualifies | A minor confirmation. Never merged into the headline.
+
+# Three rules
+S
+The CSL gives its star lord's result, :: never its own deposition or ownership.
+A conjoined or opposing planet gives its star lord's result, :: more strongly than its own houses.
+The chain stops at a star lord. :: Never step on to the star lord's star lord.
+
+# Writing the equation
+P 7th CSL Venus, in the star of Mercury, Mercury deposited in 11 and owning 2 and 7: 7 = 11 (2, 7). Branches and the sub lord go on the next lines as qualifiers.
+# Rahu or Ketu as the CSL
+P Read in this order: its conjoined planet, then its star lord, then its opposition, and the sign lord only as a last resort.
+# The sub lord gives the nature, not the result
+P For the 7th CSL: Saturn points to an age gap, Rahu to lower social status, Ketu to another religion.
+F Prashna cheat sheet steps 5–6, Bootcamp Class 10 sections 3.1 and 3.9.
+> C-02 C-08
+
+@L-12 | learn | Benefic, malefic, afflicted | Two separate tests. Both are for periods only, never for the promise.
+T Test | Rule
+Benefic or malefic | Look at the house of the planet's sub lord. In 1, 2, 3, 6, 10, 11 it is benefic. In 4, 5, 7, 8, 9, 12 it is malefic.
+Afflicted | The planet activates 6, 8 or 12 anywhere in its ABCD.
+
+# Read the two together
+T Nature | Unafflicted | Afflicted
+Benefic | Gives and improves. | Trouble comes, then it tries to improve life again.
+Malefic | Gives what it signifies but cannot improve. | Worst: trouble and no improvement.
+
+# What an afflicted planet does
+P It always troubles its own period, in the house it afflicts. 8 brings loss and shocks. 12 brings loss and exit. 6 brings debt, disease and job issues.
+C Malefic does not mean it destroys. It means it lacks the power to improve life in its period.
+P 6 is an improving house, so it gives both good and bad.
+O Class 7 tested affliction only at A or B. Class 10 widened it to the whole ABCD. Class 10 wins where they differ.
+F Class 007 section B, Bootcamp Class 10 sections 3.5 and 3.6.
+> C-05 D-08
+
+@L-13 | learn | Vimshottari: the period ladder | 120 years in all. The order is the same as the star lord order.
+T Lord | Years | Stars it rules
+Ketu | 7 | Ashwini, Magha, Mula
+Venus | 20 | Bharani, P. Phalguni, P. Ashadha
+Sun | 6 | Krittika, U. Phalguni, U. Ashadha
+Moon | 10 | Rohini, Hasta, Shravana
+Mars | 7 | Mrigashira, Chitra, Dhanishta
+Rahu | 18 | Ardra, Swati, Shatabhisha
+Jupiter | 16 | Punarvasu, Vishakha, P. Bhadrapada
+Saturn | 19 | Pushya, Anuradha, U. Bhadrapada
+Mercury | 17 | Ashlesha, Jyeshtha, Revati
+
+# Four levels: D-B-A-S
+K
+Dasa :: Major period
+Bhukti :: Sub-period
+Antara :: Third level
+Sukshma :: Fourth level
+
+# Where you start
+T -
+Birth Dasa | The Moon's star lord at birth.
+First Bhukti | The Moon's sub lord at birth.
+Example | Moon in Anuradha (Saturn), sub Mercury: born in Saturn–Mercury.
+Prashna | The Dasa runs from the Prashna Moon at the moment of the query.
+
+F Class 007 section C, Prashna cheat sheet step 10.
+> C-04 C-05
+
+@L-14 | learn | Retrograde: birth chart and Prashna differ | In a birth chart alone, retrograde is not read as delay or denial.
+C Sun, Moon, Rahu and Ketu are never retrograde.
+# In a Prashna: compare with the birth chart
+T In the Prashna | At birth | Result
+CSL retrograde | Direct | Delayed until the CSL turns direct, if the star lord promises.
+CSL retrograde | Retrograde | No delay.
+Star lord retrograde | Direct | Denied until it turns direct. Ask again with a new number after that.
+Star lord retrograde | Retrograde | Analyse further: does the star lord promise the good houses by deposition?
+
+# Two special cases
+T -
+Saturn R in its own star | Pushya, Anuradha or Uttara Bhadrapada: denial and a misleading picture. Word it cautiously and suggest a second opinion.
+No birth chart | Give a two-way answer and predict after the planet turns direct. Give the station-direct date.
+
+# Period lords in transit
+T -
+Direct at birth, retrograde in transit | No result in that span.
+Retrograde in both, and untenanted at birth | Strong results.
+
+P Notation: a retrograde planet carries an R, as in SaR.
+F Prashna cheat sheet step 7 and step 10, Diploma Class 4, orb rule section 4.
+> C-02 P-05
+
+@C-01 | chart | Read a chart: the checklist | Will it happen? When? Never answer the second before the first.
+K
+1. Will it happen? :: The Cuspal Sub Lord of the matter's primary cusp. Its star lord's houses are the promise.
+2. When? :: Ruling Planets, plus Dasa and Bhukti, plus the transits of the Sun, Moon and Lagna.
+
+C If the CSL does not promise the event, no period can give it.
+# The order of work never changes
+S
+Chart. :: A birth chart with minute-accurate cusps, or a horary chart cast from a number 1 to 249. See [[P-01]].
+Cusp. :: Name the primary cusp and its good and bad houses from [[Q-00]].
+Gate. :: Read the primary cusp's CSL through its star lord. This gives Yes or No. See [[C-02]] and [[L-11]].
+House group. :: Take the whole group of the matter, never only the main house. See [[L-07]].
+Dasa permits. :: The running Dasa must not strongly deny the matter. See [[C-04]].
+Bhukti, Antara, Sukshma. :: Together the period lords must cover the group at L1 or L2. See [[L-10]].
+Ruling Planets :: pick the day, and the Lagna the hour. See [[C-06]] and [[C-07]].
+Say it. :: State the equation and the verdict in the standard words. See [[C-09]] and [[C-10]].
+
+# Birth chart or Prashna?
+T -
+Birth chart | Shows the karma carried from the past. Best for once-in-a-lifetime events. Needs an accurate birth time.
+Prashna | One direct question, one number, one chart. Sir's working preference.
+If they disagree | On the same question, the Prashna wins.
+
+F Ruling Planets source of truth sections 1 and 5, Class 004, Prashna cheat sheet, Bootcamp Class 10 section 3.3.
+> C-02 C-08 C-04 C-06 C-07 C-09
+
+@C-02 | chart | The promise gate, step by step | The same eight moves for every matter. Only the cusp and the houses change.
+S
+Name the primary cusp :: for the question, and its good and bad houses.
+Find its CSL. :: In a Prashna, check whether it is retrograde.
+Find the CSL's star lord. :: Check whether it is retrograde.
+Take the star lord's deposition and ownership. :: This is the standard equation.
+Is the star lord linked to 6, 8 or 12? :: Note it.
+Add planets conjoined with or opposing the CSL, :: then those of the star lord. Each speaks through its own star lord.
+Write the equation. :: Deposition first, ownership in brackets. For example 10 = 4, 10, 6 [1, 8, 5].
+Give the verdict. :: The star lord's deposition decides the side.
+
+# The verdict table
+T Star lord's deposition | Branches (conj / opp) | Verdict
+Favourable | Favourable or none | YES
+Favourable | Unfavourable | YES, with difficulty or delay. Name what the bad house means.
+Unfavourable | Favourable | NO, only partial relief
+Unfavourable | Unfavourable or none | NO
+Retrograde, direct at birth | | NOT NOW. Give the date to ask again
+
+C Golden rule: the star lord's deposition cannot be denied.
+P Standard equation = the star lord alone. Derived equation = with the conjoined and opposing layer added.
+P Keep it lean: answer only what was asked. No Dasa tables unless timing is asked.
+F Class 004 (the flow), Prashna cheat sheet step 9, Bootcamp Class 10 section 3.9, Diploma Class 4 steps 9 and 11.
+> L-11 L-14 C-08 P-05
+
+@C-03 | chart | When rules pull different ways | Resolve from the top. A higher layer overrides a lower one.
+S
+The CSL gate :: decides whether the matter is promised, and its ceiling.
+The Dasa and Bhukti :: must permit. A Dasa that strongly denies blocks all its sub-periods.
+Significators that are also Ruling Planets :: are the planets that bring the event.
+Transit :: of the Sun, Moon and Lagna fixes the day and hour. It is the lowest layer.
+
+# Two cross-rules
+T -
+No cancellation | If a planet signifies two opposed events, both occur. Only the order is in question. KP never averages two influences to nothing.
+Cross-house spoiler | A planet signifying a house that stands 6th, 8th or 12th from another house spoils that other house's matter.
+
+# What is rule and what is judgment
+T -
+Rule-derivable | The gate verdict, the house-group significators, the Ruling Planet reduction, the timing window.
+Judgment | Rectifying a rough birth time. The last cut when two planets survive. Sequencing two opposed outcomes. Qualitative detail such as which line of business.
+
+O The cross-rules and an older tie-break ladder come from the Astrosecrets layer, which ranks below Sir's classes. Two of its rungs are retired: "the smaller orb wins" and the dignity ladder.
+F Prediction framework, shared engine sections 2, 3 and 6; Prashna cheat sheet step 10.
+> C-04
+
+@C-04 | chart | Timing 1: which period gives the event | The lords that give the event join the house group at L1 or L2, again and again.
+# Houses to cover when timing
+T Matter | Timing houses
+Marriage | 2, 3, 5, 7, 9, 11
+Childbirth | 2, 5, 11
+Job | 2, 6, 10, 11
+Career | 1, 2, 6, 10, 11
+Property | 2, 4, 6, 11
+Higher education | 2, 4, 6, 9, 11
+Foreign settlement | 3, 9, 11, 12
+Wealth | 2, 3, 5, 6, 8, 10, 11
+
+# Rules for the period lords
+S
+No lord has to show every house. :: Together the Dasa, Bhukti, Antara and Sukshma lords cover the group.
+Cover the whole equation: :: the core houses plus every house the CSL connects to.
+Skip barren periods :: for marriage and childbirth. A lord whose star lord is also in a barren sign gives nothing.
+A lord direct at birth but retrograde in transit :: gives no result in that span.
+The first strong period after the marriageable age :: gives the marriage.
+
+# For marriage
+P Dasa: an L1 or L2 activator of 2, 7 or 11. Bhukti and Antara: an L1 or L2 activator of 7 or 11. Any two of 2, 7, 11 will do, but not just one.
+O For the promise, Sir says any one supporting house is enough and 6 must not come. For timing, he says 2 and 7 are compulsory and 11 optional. The notes hold this reading as provisional.
+F Bootcamp Class 10 sections 3.3, 3.4 and 3.10, Diploma Class 3 timing table, Prashna cheat sheet step 10.
+> C-05 C-06 C-07
+
+@C-05 | chart | Timing 2: grading a period | Is this Bhukti good or bad for the native? Grade each adjacent pair of lords.
+S
+Nature of each lord. :: Its sub lord in 1, 2, 3, 6, 10, 11 makes it benefic.
+Aspect between the two lords. :: Good: 30°, 60°, 120°. Bad: 0°, 45°, 90°, 135°, 150°, 180°.
+Grade each adjacent pair: :: Dasa–Bhukti, Bhukti–Antara, Antara–Sukshma. No aspect, or the same planet, is ungraded.
+Nature of the period: :: the houses the lords give at L1 and L2.
+
+# Sir's aspect matrix (higher lord first)
+T Higher lord | Aspect | Lower lord | Period
+Benefic | Good | Benefic | BEST
+Benefic | Bad | Benefic | Malefic
+Benefic | Good | Malefic | Benefic
+Benefic | Bad | Malefic | Malefic
+Malefic | Good | Benefic | Malefic
+Malefic | Bad | Benefic | Malefic
+Malefic | Good | Malefic | WORST
+Malefic | Bad | Malefic | Benefic
+
+# Which event exactly
+P The lower lord delivers. Its A names the subject. The grade picks the side: benefic means gained, malefic means lost or hurt. The higher lord sets the scene.
+C A good aspect strengthens what malefics do. A bad aspect between two malefics turns the period benefic.
+P Even a worst Bhukti has relief Antaras. Time big moves for them.
+F Bootcamp Class 12, period grading; Prashna cheat sheet step 10.
+> L-12 C-06
+
+@C-06 | chart | Timing 3: the Ruling Planets | The planets ruling the moment of judgement bring the event.
+# Seven, strongest first
+T # | Ruling Planet | Note
+1 | Lagna sub lord | Strongest. Changes every few minutes, so note the seconds.
+2 | Lagna star lord |
+3 | Moon star lord |
+4 | Lagna sign lord |
+5 | Moon sub lord |
+6 | Moon sign lord |
+7 | Day lord | Weakest, always present.
+
+P Cast for the moment of judgement, to the second, for the astrologer's place.
+# Clean the list
+T -
+A | Add every planet conjoined with a Ruling Planet.
+B | Add every planet opposed to a Ruling Planet.
+C | Remove a planet in the star of a retrograde star lord.
+D | Remove a retrograde planet in the star of a retrograde star lord.
+E | Keep a retrograde planet in the star of a direct star lord.
+F | The birth chart has the final word. Only one case removes a planet: retrograde now, direct at birth.
+
+C The golden link: the event comes through planets that are both significators and Ruling Planets.
+P Ruling Planets are for timing only. They are never a test of whether a query is genuine.
+O Whether the method applies equally to birth charts and Prashna is read from the deck's examples, not stated in words. The notes mark it to confirm with Sir.
+F Ruling Planets and timing source of truth, sections 2 to 5 and 8.
+> C-07
+
+@C-07 | chart | Timing 4: the day and the hour | Use this only when the running Dasa and Bhukti permit the event.
+P A fruitful star here means the star lord of the Moon (or of the Sun) signifies the matter's favourable houses. It is not the same as a fruitful sign.
+T Moon's star | Sun's star | When the event happens
+Fruitful | Fruitful | Within 24 hours, when the Lagna enters the most favourable sign, star and sub.
+Fruitful | Not | Within 30 days, with a doubt.
+Not | Fruitful | Within 30 days.
+Not | Not | After 30 days, within 365 days.
+
+# Finding the day and hour
+T -
+Day | The Moon transits a star whose lord signifies the matter's houses. List the Moon's path for two weeks and mark Yes or No.
+Hour | The Lagna enters a favourable sign, star and sub that day. It returns about four minutes earlier each day.
+Check | A star with a retrograde lord is a "check". Apply the cleaning rules C, D and F.
+
+# Which body to move
+T To find | Move
+The hour in a day | Lagna
+The day in a month | Moon
+The month in a year | Sun
+The year | Jupiter
+
+C Ruling Planets can never give an event that the CSL or the Dasa denies.
+F Ruling Planets source of truth section 6, Prashna cheat sheet step 10 part 2, prediction framework section 4 (which body to move).
+> C-06
+
+@C-08 | chart | Worked example: one question, start to verdict | A class Prashna, walked through the checklist. Follow it with a chart of your own.
+P Question: "Will I clear the entrance exam?" This is Example 5 of the Bootcamp Class 5 deck.
+S
+Name the primary cusp. :: A competitive exam is the 3rd house. Favourable: 3 = 3, 6, 9, 11. Unfavourable: 3 = 2, 5, 8, 10, 12.
+Find its CSL. :: The 3rd CSL is Saturn. It is direct.
+Find the CSL's star lord. :: Saturn sits in Uttara Bhadrapada, a star of Saturn. So Saturn is also the star lord. It is direct.
+Take the star lord's deposition and ownership. :: Saturn is deposited in 11 and owns 10 and 11.
+Is the star lord linked to 6, 8 or 12? :: No.
+Add conjoined and opposing planets. :: None.
+Write the equation. :: 3 = 11 [10, 11].
+Give the verdict. :: YES. The deposition 11 is favourable.
+
+C Owning 10 cannot deny it: the star lord's deposition is supreme.
+# What to notice
+T -
+The CSL's own houses | Never read. Only its star lord's deposition and ownership go into the equation.
+The unfavourable 10 | It is ownership only. Had the deposition been 10, it would be a denial.
+Own star | A CSL in its own star is its own star lord. The chain still stops there.
+How to say it | "The 3rd CSL is Saturn, in its own star. Saturn is deposited in 11 and owns 10 and 11. So 3 = 11 [10, 11]. The exam is cleared."
+
+F Bootcamp Class 5 deck, Example 5 (competitive exam).
+> C-02 L-11 C-09
+
+@C-09 | chart | Say it the way a KP reader says it | Pattern sentences. Change the planets and houses, keep the shape.
+# Stating an equation
+K
+The standard line :: "The 7th CSL is Venus, in the star of Mercury. Mercury is deposited in 11 and owns 2 and 7. So 7 = 11 (2, 7)."
+Adding a branch :: "Rahu is opposed by Ketu, deposited in 8. Ketu is in the Sun's star, the Sun in 11 owning 12. Ketu gives the Sun's 11 and 12 strongly, its own 8 only weakly."
+
+# Stating a verdict
+T -
+Promise | "The star lord's deposition is favourable, so the matter is promised."
+Difficulty | "Yes, with difficulty: the 8 from the opposing planet means obstacles on the way."
+Delay | "The CSL is retrograde here and direct at birth, so it is delayed until it turns direct."
+Timing | "The Dasa permits. The Bhukti and Antara lords give 2, 7 and 11 at L1 and L2."
+Day | "The Moon's star is fruitful and the Sun's is not, so within 30 days, with a doubt."
+
+C The delivery agent may be dressed well or not, but what he delivers is what you ordered.
+P The line above is Sir's image for the sub lord. Single equations are in [[E-01]].
+F Prashna cheat sheet steps 5, 6 and 9; Bootcamp Class 10 section 3.9; Class 005.
+> E-01 C-10
+
+@C-10 | chart | Hard answers, gently worded | The astrologer is a messenger of the planets. Do not judge a person.
+# Two levels of report
+T -
+Astrologer's notes | State plainly what the chart leads to, once, and mark it "please verify manually". Never as certain.
+Client's report | Never write "death", "fatal" or a date of loss. Read the chart for the person's situation in gentle, supportable words.
+
+# Wording for the client
+T The reading | What to say
+Danger to life | "A period that needs great care and medical attention."
+A serious illness | "The illness looks serious; early and continued treatment is important."
+Low immunity | "Strength is low for now; rest, nutrition and regular check-ups help."
+No full cure | "Full recovery is not clearly shown; the condition needs to be managed over time."
+Aggravation | "Flare-ups and hospital visits are possible; keep treatment regular."
+Unresolved | "A more careful reading needs the birth chart as well."
+
+# Sir's practice
+S
+Phrase a bad answer gently: :: "The planets are not giving a clear answer. Follow the treatment. Come back after this date."
+Advise a medical check. :: Never diagnose.
+Timing, if given, is for care, :: never for an end.
+Offer one free follow-up. ::
+A repeat query the same day :: is not entertained. Ask the person to return after about six months.
+Use only the KP rules given. :: Do not add meanings from general astrology.
+
+P Sir's own terms for the astrologer's notes: "completion of life", "danger to life", "difficult times".
+F Insights wording guide (owner decision, 21 Oct 2026), Diploma Class 4 voice points, Class 005.
+
+@P-01 | prashna | Prashna in eleven steps | Never jump to the verdict. Each step is a gate: if a gate closes, stop and say why.
+S
+Number. :: One random number, 1 to 249. Cast the chart at the moment of judgement.
+Cusp. :: Name the question's cusp and its good and bad houses. See [[Q-00]].
+Rotate :: if the question is about another person. See [[P-02]].
+Genuineness gate. :: Read the Moon. See [[P-03]].
+Chain. :: The CSL and its star lord. See [[L-11]].
+Equation. :: Star lord's deposition first, ownership in brackets.
+Retrograde gate. :: The CSL and its star lord. See [[L-14]].
+Matter checks. :: Barren signs, Punarpoo, oddity, duality. See [[P-04]].
+Verdict, :: in one line. See [[C-02]].
+Timing. :: Dasa permits, then L1 to L4, then aspects, then Ruling Planets. See [[C-04]].
+Re-ask. :: If denied, say when they may ask again. See [[P-05]].
+
+C Golden rule: the star lord's deposition cannot be denied.
+# Taking the number
+T -
+One query, one number | A second question needs a new number.
+Never a favourite number | The querent meditates on the question, then gives a random number.
+Where and when | Cast for the astrologer's own place and the moment of judgement. Write the time to the second.
+A good query | Direct and specific: "Will I get married?" Not "Tell me about my future."
+
+P The birth chart is used in a Prashna only for the retrograde check and the Dasa retrograde rule.
+F Diploma Class 4 (the 11-step ladder), Sir's Prashna cheat sheet, Class 004.
+> P-02 P-03 P-04 C-02 P-05 P-07
+
+@P-02 | prashna | Rotation: asking for someone else | Make that person's house the new 1st, then read every cusp from there.
+T House | Person
+2 | Family, distant relatives
+3 | Younger sibling, neighbour, father-in-law
+4 | Mother, student
+5 | Lover; a mother's first child
+6 | Servant, employee, colleague
+7 | Spouse, partner, boss, customer, open enemy
+8 | Doctor
+9 | Father, guru, teacher
+10 | Mother-in-law, public leader
+11 | Elder sibling, friend; all of a father's children
+12 | Foreigner, hidden enemy
+
+# A mother's children, in order
+T 1st | 2nd | 3rd | 4th | 5th
+5th | 7th | 9th | 11th | 2nd
+
+# Rules
+S
+Rotate only when the question is truly about a relative. ::
+The rotated chart is that person's karma and mind, :: as if they had asked you themselves.
+Maraka and Badhaka :: are counted from the rotated chart.
+Steps 5 to 11 :: all use the rotated chart.
+
+P Example. A father asks about his daughter's marriage. Rotate to the 11th, not the 5th, then read the new 7th CSL.
+P Sir prefers the mother's number for a child. He never rotates to the 12th.
+F Prashna cheat sheet step 3, Diploma Class 4 step 3.
+> P-03
+
+@P-03 | prashna | Is the question genuine? Only the Moon shows the mind | Write one or two lines on genuineness in every Prashna answer.
+# Read the Moon's ABCD and its sub lord
+T -
+A | The Moon's star lord's deposition
+B | The Moon's own deposition
+C | The star lord's ownership
+D | The Moon's own ownership
++ | The Moon's sub lord: its deposition and ownership
+
+K
+Genuine :: Any of these touches any house related to the query.
+Not genuine :: None does. Do not predict. Ask for a new number.
+
+# Rules
+T -
+Do not demand | the primary house itself.
+Do not use | a Ruling Planets agreement test for genuineness.
+Two Moons | For a relative: the querent's Moon before rotating, the relative's Moon after.
+Depositions and ownerships | Depositions are the main thoughts. Ownerships are fainter fears or hopes.
+Badhaka | If the Moon touches the chart's Badhaka house, the worry is about death itself. Answer with great care.
+
+# Read what the querent is really saying
+P A health question with the Moon's ABCD at 2, 4, 7, 10 and its sub lord in 8 says: there is no improvement (4, 10), I am worried (8), it may be dangerous (2, 7). Genuine, even without 6 or 12.
+O When only a node-ladder link passes the gate, Sir called the query not genuine. The tool now flags such a case as doubtful.
+F Prashna cheat sheet step 4, Diploma Class 4 step 4 and difference C4-1.
+> P-04
+
+@P-04 | prashna | Matter checks: four extra gates | These apply to a Prashna exactly as to a birth chart. Run the ones your question needs.
+# 1. Barren signs (marriage and childbirth)
+T -
+CSL and its star lord both barren | Denied.
+Only one barren | Look at the star lord's deposition. In 6: denial. In 1 or 10 owning 6: weigh carefully. Otherwise possible, with problems.
+What is checked | Only the CSL and its star lord. Never the sub lord.
+
+# 2. Punarpoo (marriage only)
+P Present and not cancelled: marriage only after 33, and only if the 7th CSL promises. The full rule is in [[D-01]] and [[D-02]].
+# 3. Oddity
+P The 5th CSL (love) or 7th CSL (marriage) is Saturn, or is conjoined with or opposed by Saturn. A Saturn star lord does not give it.
+# 4. Duality (second marriage)
+P The 7th CSL is Mercury or Jupiter, sits in a dual sign, is in their star, or is conjoined with them. Jupiter means two, Mercury more.
+# Reading nodes and Saturn
+T -
+A node in its own star, unaspected | Gives the sign lord's result.
+6th CSL Saturn or Rahu | A chronic or serious pattern. Advise a medical check.
+Saturn R in its own star | Misleading. Take a second opinion.
+
+F Prashna cheat sheet step 8, Diploma Class 4 step 8 and voice points.
+> D-01 D-02 M-02
+
+@P-05 | prashna | The re-ask: when may they ask again? | Five verdicts only. A denial is valid only as long as its reason lasts.
+K
+YES :: Star lord favourable, branches favourable or none.
+YES, with difficulty :: Star lord favourable, branches unfavourable. Name what the bad house means.
+NO, partial relief :: Star lord unfavourable, branches favourable.
+NO :: Star lord unfavourable, branches unfavourable or none.
+NOT NOW :: Star lord retrograde, direct at birth. Give the date to ask again.
+
+# When may they ask again?
+T Why it was denied | Ask a new Prashna, with a new number
+The CSL's star lord is retrograde | After it turns direct. Give the station-direct date.
+The running Dasa or Bhukti is barren | After the next fruitful period begins. Name it and its start date.
+The Moon did not reflect the question | Straight away, with a fresh random number.
+A timing window failed | After the blocking lord turns direct.
+No specific reason | After about 6 months.
+
+# Infer the meaning of each house
+T -
+Visa: 3 = 9 = 5 (1, 10) | 5 is the denial of 6. The appeal does not succeed.
+Addiction: 5 = 3 (2, 3) | Recovery through his own effort and will power.
+Lent money, mixed | Most lost, some recovered.
+
+C Never give a flat verdict while the star lord is retrograde.
+F Prashna cheat sheet steps 9 and 11, Diploma Class 4 steps 9 and 11.
+> L-14
+
+@P-06 | prashna | Missing person or lost object | These use their own method, not the usual full chain.
+S
+Number :: from a blood relative or the person affected.
+Rotate. :: A person: to their house. An object: to its cusp.
+Genuineness :: with the Moon, after rotating.
+Read the new 1st CSL's star lord only, :: plus the CSL's conjoined and opposing planets. Do not walk further.
+Maraka and Badhaka first, :: from the rotated Lagna. A star lord connected to both means lost for good.
+Then the element of the star lord's sign, :: not the CSL's own sign.
+
+T Fire | Land | Air | Water
+Injured or damaged | Safe | Safe, far away | Lost
+
+# Will it come back?
+T -
+Person | 1 = 2, 4, 5, 7, 11: safe return. 1, 3, 6, 8, 9, 10, 12: difficulty.
+Gold, jewellery | 1 = 2, 4, 6, 10, 11: recovered. 1 = 7: someone may have taken it.
+
+# Which cusp for which object
+T Cusp | Object
+1 | Helmet, ID
+2 | Jewellery, keys, valuables
+3 | Phone, documents
+4 | Vehicle, furniture, books
+5 | Sports goods, perfume
+6 | Cash, cards, medicine
+7 | Anything stolen
+8 | Underground, will, insurance
+9 | Idols, puja items
+10 | Government items, awards
+11 | Favourite items
+12 | Footwear
+
+P For a missing person the water sign carries the gravest reading. See [[C-10]] for how to word it. Direction by planet: Sun E, Moon NW, Mars S, Mercury N, Jupiter and Ketu NE, Venus SE, Saturn W, Rahu SW.
+F Lost-article resolution of 18 Nov 2026, Prashna cheat sheet, category map rows 10a to 10d.
+> P-02 C-10
+
+@P-07 | prashna | Write every Prashna the same way | Sir's most common correction is not following the template.
+T # | Heading | What to write
+1 | Chart | Horary number, date and time to the second, your place, the question in the querent's words.
+2 | Rotation | "Rotated to the 11th (daughter of a father)" or "Not rotated".
+3 | Genuineness | The Moon's ABCD and sub lord, the houses touched, the real concern behind the words.
+4 | Equation | 7 = 11 (2, 7), then each branch and the sub lord as qualifiers.
+5 | Retrograde | CSL and star lord: direct, or retrograde with the birth-chart comparison.
+6 | Matter checks | Barren signs, Punarpoo, oddity, duality: only those the question needs.
+7 | Verdict | One of the five verdicts, in plain English.
+8 | Timing or re-ask | The period window and the Ruling Planets day if asked, or the date to ask again.
+
+# Common mistakes, and the fix
+T Do not | Do
+Read the CSL's own deposition or ownership | Speak only through the Prediction Analysis chain
+Step on to the star lord's star lord | Stop at the star lord
+Treat all houses in the chain as equal | Let the star lord's deposition decide the side
+Use sign lords, exaltation or debilitation | Use the sign only for nature, barrenness, duality
+Read only one Moon for a relative | Read the querent's Moon, then the relative's
+Accept a favourite number | One query, one random number
+Add meanings from general astrology | Use only Sir's rules
+
+F Prashna cheat sheet: answer template and common mistakes.
+
+@Q-00 | ask | Question finder: every question at a glance | One primary cusp per question. Its CSL answers as "CSL = houses". Tap a question for its card.
+T Question | CSL | Yes houses | No or trouble
+[[M-01|Will I marry?]] | 7th | 2, 3, 5, 7, 9, 11 + fruitful sign | 6 denial · 1, 8, 12 difficulty · 4, 10 delay
+[[M-02|Happy married life?]] | 11th | 2, 3, 5, 7, 9, 11 | 1, 6, 8, 10, 12
+[[M-03|Will I have a child? (her question)]] | 5th | 2, 5, 11 | 1, 4, 10 (6, 8, 12)
+[[M-03|Will we have a child? (husband asks)]] | 11th | 2, 5, 11 | 1, 4, 10
+[[M-04|Will I get a job?]] | 6th | 2, 6, 10, 11 | 1, 5, 9 (8, 12)
+[[M-05|Career, promotion]] | 10th | 1, 2, 6, 10, 11 | 5, 8, 9, 12
+[[M-07|Buy a house or land?]] | 4th | 2, 4, 6, 11 | 3, 5, 8, 10, 12
+[[M-07|Buy a vehicle?]] | 4th | 2, 4, 6, 9, 11 (9 a must) | 3, 5, 8, 10, 12
+[[M-06|Higher education]] | 9th | 2, 4, 6, 9, 11 | 3, 5, 8, 10, 12
+[[M-06|Competitive exam]] | 3rd | 3, 6, 9, 11 | 2, 5, 8, 10, 12
+[[M-08|Visa approval]] | 9th | 3, 6, 9, 11 | 5, 8
+[[M-08|Foreign travel, settle abroad]] | 12th | 3, 9, 12 travel · + 11 settle | 4, 8
+[[M-10|Cure of disease]] | 6th | 3, 5, 9, 11 | 2, 4, 6, 8, 10, 12
+[[M-09|Court case: will I win?]] | 12th | 2, 6, 11 win · 9 compromise | 5, 7, 8, 12
+[[M-01|Lover returns after a break-up]] | 5th | 2, 5, 11 |
+[[P-05|Coming out of an addiction]] | 5th | 3, 5, 9, 11 |
+[[P-06|Missing person or lost object]] | Rotated 1st | See the card |
+
+P "Bad" is for this matter only. 6 wins a job and a court case. 8 can be the purpose of travel. 12 is foreign travel itself.
+O Married life: this row follows the Class 7 slide; [[M-02]] also lists 4 (Class 9 voice and Toolkit). Vehicle: the Class 6 deck gives 2, 4, 9, 11. See [[B-01]].
+F Sir's Prashna cheat sheet, step 2. The cards add the Toolkit rows for each category.
+> E-01
+
+@M-01 | ask | Marriage: will it happen, and how | Primary cusp: the 7th. Read the 7th CSL through its star lord.
+T Question | Rule
+Promise | 7 = 2, 3, 5, 7, 9, 11 and a fruitful sign. Any one supporting house is enough.
+Denial | 7 = 6 by deposition. Also the 7th CSL and its star lord both in barren signs.
+Difficulty, delay | 1, 8, 12 bring difficulty. 4 and 10 bring delay, not denial.
+Love marriage | 7 → 2, 7, 11 plus 5.
+Arranged marriage | 7 → 2, 7, 11 plus 8.
+
+# What the 7th says with other houses
+T -
+7 + 3 | Introductions.
+7 + 4 | Marriage within the family, or a neighbour in the same building.
+7 + 5 | Love.
+7 + 8 | Arranged marriage, with difficulty.
+
+# The 7th sub lord shows the nature of the partner
+T -
+Saturn | Age gap; a widow, widower or divorcee.
+Rahu | Lower social status.
+Ketu | Another religion, a foreigner, or out of caste.
+
+# Love before marriage (read the 5th CSL)
+T -
+Live-in | 5 → 5, 8, 11
+End of a love affair | 5 → 4, 6, 8, 10, 12
+Lover returns after a break-up | 5 = 2, 5, 11
+
+P Timing houses: 2, 3, 5, 7, 9, 11. See [[C-04]]. Run the barren-sign and Punarpoo checks in [[P-04]].
+F Category map rows 1a, 1b, 1g, 1h; Bootcamp Class 10 sections 3.4, 3.9 and 3.10; Prashna cheat sheet.
+> P-04 D-01 D-02 C-04 M-02
+
+@M-02 | ask | Married life and second marriage | Married life is read from the 11th CSL, not the 7th.
+T 11th CSL gives | Reading
+2, 3, 5, 7, 9, 11 | Happy married life.
+1, 4, 6, 8, 10, 12 | Unhappy married life.
+6, 8, 12 | Legal divorce.
+1 or 10 | Separation.
+1, 4, 10 | Living like roommates.
+
+O The Toolkit's own divorce row is 11 → 1, 6, 10, 12. Class 9 grades 6, 8, 12 as divorce. The notes show both and treat the Toolkit row as a cross-reference.
+# Second marriage: duality first
+P The 7th CSL must show duality. It is Mercury or Jupiter, sits in a dual sign, is in their star, or is conjoined with them. Jupiter means two. Mercury means more.
+T -
+After divorce | Read the 9th: 9 = 2, 7, 9, 11.
+After the spouse's death | Read the 2nd: 2 = 2, 7, 11.
+
+# Oddity
+P A love or marriage out of the ordinary by social convention: the girl older, a widow or widower, a divorcee, another religion or caste, an age gap over 5 years.
+C Oddity shows when the 5th or 7th CSL is Saturn, or is conjoined with or opposed by Saturn. A Saturn star lord does not give it.
+# One reading to remember
+P 7 = 3 [1, 8]: marriage will happen, with an affectionate spouse. Sir reads the 8 by ownership as a mild flag, not a divorce flag.
+F Category map row 1c, Prashna cheat sheet step 8, Diploma Class 2 marriage-matching digest.
+> P-04 D-05
+
+@M-03 | ask | Children | Read the mother's chart. Avoid the father's if you can.
+T Question | Rule
+Promise | 5th CSL → 2, 5, 11 and a fruitful sign.
+Denial | 5 → 1, 4, 10 with barren signs. Also when the 5th CSL and its star lord are both in Aries, Gemini, Leo or Virgo.
+Medical help or IVF | 5 → 1, 4, 6, 8, 12 with non-barren signs.
+Father's chart | If unavoidable, use the 11th house for all his children.
+Last child | 5th sub lord in a barren sign, but its star lord fruitful and signifying 2, 5 or 11.
+
+# Which house for which child (mother's chart)
+T 1st | 2nd | 3rd | 4th | 5th
+5th | 7th | 9th | 11th | 2nd
+
+# Timing and cautions
+T -
+Timing | Dasa, Bhukti, Antara of the 5th significators, for 2, 5, 11.
+Saturn as the 5th sub lord | Delay.
+Barren period | The Mahadasa lord and its star lord must not both be in barren signs.
+5th sub lord Mars, Sun or Ketu | Miscarriage risk. Rahu only when tied to Mars. Handle with care.
+
+P In a Prashna: she asks, read the 5th. The husband asks, read the 11th. Sir prefers the mother's number for a child.
+O Gender prediction rows exist in the Toolkit. They are left off this page.
+F Category map rows 2a to 2e, Prashna cheat sheet steps 2 and 3, Diploma Class 4. Miscarriage row corrected to Krish Sir's ruling of 17 Nov 2026.
+> P-04 P-02 C-04
+
+@M-04 | ask | Job and employment | Primary cusp: the 6th. The 10th is added for promotion, not for getting a job.
+T Question | Rule
+Will I get a job? | 6 = 2, 6, 10, 11. Against: 1, 5, 9, and 8, 12.
+Toolkit row | Job: 6 → 2, 6, 11.
+Promotion | 6 → 2, 6, 11 plus 10.
+Job change | 6 with 5, 3, 9 or 12. The Toolkit row is 6 → 5, 9.
+Same company | 6 + 6.
+Loss of job | 6 → 5, 8, 12.
+Resignation in haste | 6 → 2, 8, 9, 10.
+Termination | 10 → 5, 8, 9.
+Suspension | 10 → 1, 5, 8, 9, 12.
+Foreign job | 12 → 3, 9, 11, 12 plus 6.
+
+# Things Sir says about job equations
+T -
+6 = 3 | A soft yes for a job, of the contract type.
+6 = 8 | Sudden.
+House 4 | Location, work from home, teaching, status quo.
+5 from 6 | The 5th is 12th from the 6th: the end of service.
+
+# Timing
+P Cover 2, 6, 10, 11 with the Dasa, Bhukti and Antara lords at L1 or L2. Add 11 to time the offer.
+O The engine treats 6 = 3 as a fork. Class 4 settles it as a soft yes; the tool change awaits the owner's approval.
+F Category map rows 3c, 3d, 4a to 4c; Diploma Class 4 question table; Bootcamp Class 10 section 3.4.
+> M-05 C-04
+
+@M-05 | ask | Career and profession | Primary cusp: the 10th. Profession is seen from the star the 10th CSL occupies.
+T Question | Rule
+Career, promotion | 10 = 1, 2, 6, 10, 11. Against: 5, 8, 9, 12.
+Job or business? | Look at the 10th CSL's star lord. 6 or 8 points to a job. 7, 10 or 11 points to business. Mixed means both.
+Change of career | 10 → 9.
+Partnership | 7 = 2, 6, 7, 11. Against: 1, 5, 8, 12.
+Social media | 3 = 1, 3, 5, 6, 10, 11. Against: 2, 4, 7, 8, 9, 12.
+
+# Which profession: the method
+S
+Find the 10th CSL and the star it occupies. ::
+Take that star's profession list, :: with the nature of its sign.
+Take the star lord's deposition :: for the source of income, for example 10 = 2 for voice, jewellery, lending.
+Add planets conjoined with or opposing :: the CSL or its star lord. Many such planets mean multiple roles.
+Shortlist five to ten professions. :: The real-life match is judged by the astrologer.
+
+# Partnership notes
+T -
+7 = 5 | A loss.
+7 = 6 | Income through a partner.
+Independent business | Read the 10th.
+
+P The star-wise profession lists are a separate long file in the notes. They are not reproduced here.
+F Category map rows 3a, 3b, 3c; Class 007 section D; Diploma Class 4 question table and voice points.
+> M-04 M-09
+
+@M-06 | ask | Education | School is the 4th CSL. Higher education is the 9th CSL.
+T Question | Rule
+School | 4th CSL → 2, 4, 6, 9, 11.
+Higher education | 9th CSL → 2, 4, 6, 9, 11. Against: 3, 5, 8, 10, 12.
+Competitive exam | 3rd CSL → 3, 6, 9, 11. Against: 2, 5, 8, 10, 12.
+School damaged | 4 → 3, 5, 8.
+Failure | 4 → 8.
+Change of school | 4 → 3.
+Foreign study | Foreign travel 12 → 3, 9, 11, 12, plus 4 or 9.
+
+# Points to say
+T -
+School first | If school is not promised, higher education is moot.
+Deposition in the 1st | Reads as wisdom. It caps the result at "largely", it is not a denial.
+Which stream | The 9th CSL's stream, matched with the 10th CSL's star professions and the income houses.
+What the levels mean | 4th: school to about the 10th standard. 9th: 12th standard, college and post-graduation.
+
+O Doctorate or PhD: the notes route it to the 12th CSL (Toolkit: 4, 9, 11 plus Saturn) and keep the 9th CSL for college only. Report both, never blend. Four questions on this await Sir.
+F Category map rows 5a to 5e, Class 005, Prashna cheat sheet step 2.
+> C-08 M-08
+
+@M-07 | ask | Property and vehicles | Primary cusp: the 4th.
+T Question | Rule
+Buy a house or land | 4 = 2, 4, 6, 11. Against: 3, 5, 8, 10, 12.
+Toolkit row: owning a house | 4 → 2, 4, 11.
+Construct a house | 4 → 4, 11.
+Construct with a housing loan | 4 → 4, 11 plus 12.
+Sale | 4 → 3, 5, 10. Add 2 or 11 for profit, 8 or 12 for loss.
+Handing over from the builder | 4 → 2, 4, 11 plus Mars.
+Taking possession of a flat | 4 → 9, 11.
+Occupying a new house | 4 → 1, 11.
+Renting a building | 4 → 6, 11.
+Getting a tenant | 5 → 4, 6, 11.
+Tenant vacating | 11 → 6, 8.
+
+# Vehicles
+T -
+Buy a vehicle | 4 = 2, 4, 6, 9, 11. The 9th is a must.
+Toolkit row: purchase of a car | 4 → 4, 9, 10, 11. Add 12 for a vehicle loan.
+Vehicle theft | 4 → 4, 6, 8, 12 plus Saturn or Rahu.
+
+P Timing houses for property: 2, 4, 6, 11.
+O House purchase has a fork in the notes: KSK gives 4, 11, 12 and the RVA tradition gives 4, 9, 11. The procedure runs both.
+O Krish Sir's November reply adds house 1 for property (4 = 1, 2, 4, 6, 11). The Class 6 deck gives vehicle 2, 4, 9, 11. See [[B-01]].
+F Category map rows 6a to 6f, Prashna cheat sheet step 2, Bootcamp Class 10 section 3.4.
+> C-04 B-01
+
+@M-08 | ask | Travel, visa and settling abroad | Primary cusp: the 12th for going abroad, the 9th for the visa.
+T Question | Rule
+Foreign travel | 12 = 3, 9, 12. Toolkit row: 12 → 3, 9, 11, 12.
+Settle abroad | Add 11. Timing houses: 3, 9, 11, 12.
+Against | 4 and 8. The 4th is the homeland.
+Visa application | 3rd, with 3, 6, 9, 11. The Toolkit row adds 12.
+Visa approval | 9 = 3, 6, 9, 11. Against: 5 and 8.
+
+# Distance
+T Local, up to 30 | 30 to 300 | Over 300
+3rd | 9th | 12th
+
+# Purpose: add one house
+T Study | Medical | Job | Pleasure | With spouse
+4 or 9 | 8 or 12 | 6 | 5 | 7
+
+# Points to say
+T -
+12 = 12 | Foreign travel is promised. Here 12 is the matter itself, not a loss.
+Visa and 5 | 5 is the denial of 6, the winning. An appeal with 5 does not succeed.
+3 = 8 "luck" | Does not apply to a visa.
+Reading 4 with 12 | The star lord giving 4 does not by itself mean no settlement abroad.
+
+P The Toolkit states distances in km and Class 5 in miles. The house for each band is the same.
+F Category map rows 7a to 7c, Prashna cheat sheet steps 2 and 9, Diploma Class 4 voice points, Bootcamp Class 10. Visa application row corrected to Krish Sir's November reply.
+> C-04
+
+@M-09 | ask | Money, loans and court cases | Income is read from the source house, with 2, 6 and 11.
+# Income: which house is the source
+T House | Source | House | Source
+1 | Personal effort | 7 | Partnership
+2 | Jewellery, voice | 8 | Unearned income
+3 | Mind, trade | 9 | Research, religion
+4 | Property, education | 10 | Profession
+5 | Recreation | 11 | Friends
+6 | Job | 12 | Foreign
+
+T Question | Rule
+Rich or poor | 2 = 2, 3, 6, 10, 11 is rich. 2 = 1, 5, 9, 8, 12 is poverty.
+Loss | The house plus 5, 8, 12.
+Lent money: will it return? | 6th with the 11th: 2, 6, 11. Against: 5, 8, 12.
+Loan repayment | 6 → 5, 8, 12.
+
+# Court case
+T -
+Will I win? | 12th CSL: 2, 6, 11 win. 9 is a compromise. 5, 7, 8, 12 mean severe losses.
+Self against opponent | Self: 1, 2, 3, 6, 10, 11. Opponent: 7, 8, 9, 12, 4, 5.
+
+P Example. 2nd CSL Mercury, star lord Sun in 11 owning 11: 2 = 11 [11]. Sufficient, incremental wealth and no poverty, but not very rich, since only 11 is seen.
+O The self-against-opponent reading comes from the older playbook layer. Sir's cheat sheet gives the 12th CSL row.
+F Category map rows 8a, 11a, 11b; Class 005; Prashna cheat sheet step 2; Diploma Class 4 question table.
+> D-07
+
+@M-10 | ask | Health and cure | Primary cusp: the 6th. Advise a medical check. Never diagnose.
+T Question | Rule
+Cure of disease | 6 = 3, 5, 9, 11. Against: 2, 4, 6, 8, 10, 12.
+Recovery, good health | 6 → 5, 11.
+Ill health | 6 → 1, 8, 12.
+Chronic illness | 6 → 1, 6, 8 plus Saturn.
+Always in poor health | 1 → 1, 6, 8, 12.
+Hospitalisation, expenses | 6 = 12.
+
+# Nature of the treatment: the 5th CSL and its star lord
+T Planet | Treatment | Planet | Treatment
+Ketu | Alternative | Mars | Surgery
+Jupiter | Standard procedure | Moon | Liquid medicine
+Sun | Injection | Mercury | Nerve medicine, acupuncture
+
+# Words Sir uses
+T -
+Saturn | Chronic.
+Rahu | Aggressive.
+Jupiter, Mercury | "Again", "repeated".
+
+# In a Prashna
+P For a relative, rotate the chart and read two Moons. Check the Badhaka: for cure questions it matters. Read the disease from the star of the 6th CSL.
+C Phrase a hard answer gently: follow the treatment, and come back after a date.
+P The star-wise disease list and the rules for grave outcomes are in the notes. [[C-10]] covers the wording for grave outcomes.
+F Category map rows 9a, 9b; Prashna cheat sheet steps 2, 4 and 8; Diploma Class 4 voice points.
+> P-02 P-03 C-10
+
+@E-01 | ask | Equation finder: what does this equation mean? | Single equations as they are read on the cards. Tap the card for the full rule.
+T Equation | Reading | Card
+7 = 6 | Denial of marriage (by the star lord's deposition). | [[M-01]]
+7 = 4 or 10 | Marriage delayed, not denied. | [[M-01]]
+7 = 1, 8 or 12 | Marriage with difficulty. | [[M-01]]
+7 + 5 | Love marriage. | [[M-01]]
+7 + 8 | Arranged marriage, with difficulty. | [[M-01]]
+7 = 3 [1, 8] | Marriage will happen, affectionate spouse; the 8 by ownership is a mild flag. | [[M-02]]
+11 = 6, 8, 12 | Legal divorce (married life is read from the 11th). | [[M-02]]
+11 = 1 or 10 | Separation. | [[M-02]]
+11 = 1, 4, 10 | Living like roommates. | [[M-02]]
+5 = 1, 4, 10 | Childbirth denied, with barren signs. | [[M-03]]
+6 = 3 | A soft yes for a job, of the contract type. | [[M-04]]
+6 = 8 | Sudden. | [[M-04]]
+6 + 6 | Same company. | [[M-04]]
+6 = 5, 8, 12 | Loss of job. | [[M-04]]
+6 = 12 | Hospitalisation, expenses. | [[M-10]]
+6 = 5, 11 | Recovery, good health. | [[M-10]]
+10 = 9 | Change of career. | [[M-05]]
+7 = 5 (business) | A loss in partnership. | [[M-05]]
+7 = 6 (business) | Income through a partner. | [[M-05]]
+4 = 8 | Failure in school education. | [[M-06]]
+4 = 3 | Change of school. | [[M-06]]
+9 = 5 | Mantra. | [[C-09]]
+12 = 12 | Foreign travel promised. 12 is the matter itself here. | [[M-08]]
+8 = 8 | Inheritance favoured. | [[L-07]]
+2 = 11 [11] | Sufficient, incremental wealth; not very rich. | [[M-09]]
+3 = 9 = 5 (visa) | 5 is the denial of 6. The appeal does not succeed. | [[P-05]]
+5 = 3 (addiction) | Recovery through own effort and will power. | [[P-05]]
+1 = 7 (lost gold) | Someone may have taken it. | [[P-06]]
+
+P A reading holds only for the matter judged. The same house is good for one question and bad for another. Always start from the matter's own row in [[Q-00]].
+F Compiled from the category cards and the pattern-sentence page. No new rule is added here.
+> Q-00
+
+@D-01 | deep | Punarpoo Dosha: when it is present | The Moon (mind) and Saturn (delay) joined. The Sun removes it.
+K
+Effect :: Marriage only after about 33. It delays. It never denies.
+Scope :: Marriage only. Not job, house or child. Birth chart and Prashna alike.
+Who counts :: Only the Moon, Saturn and the Sun. Rahu and Ketu never stand in.
+
+# The four conditions: any one makes it present
+T # | Test | Stars to know
+1 | Saturn in the Moon's star or sub | Rohini, Hasta, Shravana
+2 | The Moon in Saturn's star or sub | Pushya, Anuradha, U. Bhadrapada
+3 | Moon and Saturn conjunct within 3°20′ |
+4 | Moon and Saturn opposite, 180° ± 3°20′ |
+
+# The six steps, always in this order
+S
+Is it present? :: The four conditions. One is enough.
+Is it cancelled? :: The nine cancellations in [[D-02]]. One is enough. Always run all nine.
+Set the age rule. :: Present and not cancelled: only after about 33. Otherwise normal timing.
+Check the promise. :: The 7th CSL and its star lord. 7 = 6 is denial.
+Check the life span. :: The 1st CSL's star lord, with Maraka and Badhaka.
+Time the marriage :: with the strongest L1 and L2 lords of 2, 7, 11.
+
+O Class 3 says "about 32.5 years"; the cheat sheet and Class 4 say "after 33". The notes keep both: use whole-year 33 for the age, then check barren Dasas.
+F Diploma Class 3 Punarpoo digest (source of truth), Diploma Class 4 difference C4-6.
+> D-02 M-01
+
+@D-02 | deep | Punarpoo: the nine cancellations | Any one is enough. All of them run through the Sun.
+T # | The dosha is cancelled if
+1 | The Sun is in Saturn's star or sub.
+2 | The Sun is in the Moon's star or sub.
+3 | The Sun is conjunct the Moon or Saturn, within 6°40′.
+4 | The Sun is opposite the Moon or Saturn, 180° ± 6°40′.
+5 | Saturn is in the Sun's star or sub (Krittika, U. Phalguni, U. Ashadha).
+6 | The Moon is in the Sun's star or sub.
+7 | The Sun's star lord is near the Moon or Saturn. Star lord only.
+8 | A planet near the Moon or Saturn stands in the Sun's star.
+9 | The Sun is conjunct a planet X within 6°40′, and the Moon or Saturn is in X's star or sub.
+
+P Near means conjunct or opposite.
+# Golden rules
+S
+Star and sub: :: check both, always.
+Rahu and Ketu never stand in :: for the Moon, Saturn or the Sun. A node may still be the star lord or the planet X.
+Same house and same sign :: for a conjunction.
+Always run all nine. :: Seeing a dosha does not mean marriage comes after 33.
+The 7th CSL must promise. :: Denied is denied.
+Do not time a marriage before 33 :: while the dosha is active.
+
+O Rule 9 was validated in class on 15 Nov 2026. The sub-lord version of rule 7 is still under Sir's research and is not released.
+F Diploma Class 3 Punarpoo digest, section 1.
+> D-01
+
+@D-03 | deep | Birth-time rectification: the order of work | Life-events matching is Sir's preferred method. The true birth moment is the first breath.
+T Method | Standing
+Life-events matching | Preferred. Detailed and slow, but much better accuracy.
+Ruling-Planet matching | Prof. KSK's method. Reproduced, but not recommended: complicated and error-prone.
+
+# Cusp-first elimination
+S
+Scan the whole window: :: all 12 cuspal sub lords, every 10 seconds.
+Hardest facts first: :: marriages, legal divorce, any oddity, childbirth, living abroad, major disease, profession, mindset.
+Put each fact on its own cusp. :: See [[D-04]].
+Eliminate windows, :: one test per fact. Record the one-line reason each window fails.
+Survivor check: :: the 12 CSLs and their star-lord chains must fit every hard fact.
+Narrow to seconds. :: The nearest flips of the fact-carrying cusps are the edges.
+Dasa dates last, :: as confirmation.
+Report the window in seconds. :: The "rectified time" is a point in its middle, by convention.
+
+# The oddity rule
+T -
+Which planet | Saturn.
+How it shows | The cusp sub lord itself is Saturn, or is conjoined with or opposed by Saturn.
+What does not count | The star lord. "Rahu in the star of Saturn is not an oddity. Saturn in the star of Rahu is."
+Second marriage after divorce | Read from the 9th. The 9th CSL carries the oddity; the 7th must not.
+
+P Beginners: a 20-minute window. Sir: up to two hours, over five or six sittings.
+F Class 011 BTR digest sections 0 and 13 (Class 12 update), Class 004.
+> D-04
+
+@D-04 | deep | Rectification: which fact sits on which cusp | Each life fact must show in the houses its cusp signifies.
+T Cusp | Life facts | Should signify
+1 | Personality, immunity | One planet, found by elimination
+2 | Money, speech; cheated by strangers | A link to 12 for the unknown enemy; savings by 2, 11
+3 | Hobbies, luck, mindset | 5, 8, 11
+4 | School, mother, property; accident survived | 8, 12 with 11, 5; 6 should not appear
+5 | Romance, live-in, speculation | 5, 8, 11 with Rahu
+6 | Job loss, disease | 5, 6, 8, 12 with duality; the star names the disease
+7 | Marriage; unmarried | 6, 10, 1 with a barren sign. Hold lightly
+9 | Mantra, foreign study, father | 5, 9, 11, 12, 4
+10 | Profession | The star-wise profession must match
+11 | Gains; for a male, children | Barren sign or 4, 10, 6, 8, 12 if no child
+12 | Foreign residence, loss by fraud | 12 = 12; abroad 3, 6, 9, 12
+
+# Lagna sub lord from temperament
+T Planet | Temperament | Planet | Temperament
+Mars | Angry, aggressive | Venus | Colourful
+Sun | Egoistic; keeps rules | Ketu | Timid, shy
+Mercury | Easy-going, fluctuating | Moon | Imaginative, oscillating
+Saturn | Slow, careful | Rahu | Ambitious, rule-breaking
+Jupiter | Ethical, follows rules | |
+
+P Shortcuts: unknown enemy 12, known enemy 7, suddenness 8, rescue from harm 5 or 11, live-in without marriage 5 not 7. An absent house is as informative as a present one.
+O Temperament can leave two candidates. Dated events, not more personality questions, separate them. Ask forced-choice questions, never leading ones.
+F Class 011 BTR digest sections 2.1 and 2.2 (one class case; the "should signify" column is from that case).
+> D-03
+
+@D-05 | deep | Marriage matching: five methods, one order | A, then B, C, D, E, then timing. Report every method. When they disagree, say both.
+T Code | Method | Rule
+A | Made for each other | Groom's 7th CSL = bride's Moon star lord, or the reverse. One direction is enough.
+B | Each chart alone | 7th CSL for marriage, 11th CSL for married life. Sir: the most important method.
+C | KPDP, ten steps | Mentality, love, deep personality, joy, appreciation, physical, overall, probability, regularity, timing.
+D | Sir's 17 checks | Is each person sound alone: lifespan, wealth, child, health, married life.
+E | House by house | Each house's CSL in one chart against the same house's CSL in the other, by aspect.
+
+# Details to remember
+T -
+B, marriage | 7 = any of 2, 3, 5, 7, 9, 11 with a fruitful sign. 11 = the same set: happy.
+C, step 3 | Passing pairs of Lagna elements: Fire–Fire, Water–Water, Fire–Air, Water–Earth, Air–Water. Air–Air and Earth–Earth fail.
+D, essential checks | The bride's 5th, the 6th, the 7th, the 11th, the 3rd CSL (mindset), the 6th CSL (health).
+E, aspects | Benefic 30°, 60°, 120°. Malefic 0°, 45°, 90°, 135°, 150°, 180°. The 5th and 7th matter most.
+Timing | Method B must show marriage for both, with 2, 7, 11 active in both at once.
+
+# Golden rules
+S
+Never count KPDP steps alone. ::
+Both the 7th CSL and its star lord in barren signs :: is denial.
+Confirm the birth time. :: Try 2 to 5 minutes either side and say what each branch gives.
+
+F Diploma Class 2 marriage-matching digest, section 1; category map row 1d. Method A corrected to Krish Sir's ruling of 14 Nov 2026.
+> M-01 M-02
+
+@D-06 | deep | Longevity: the bracket method | A study method for practice charts. Every reading depends on an accurate birth time.
+# Fixing the lifespan bracket
+S
+Lagna sign :: and its modality: movable, fixed or dual.
+Badhaka house: :: 11th for movable, 9th for fixed, 7th for dual.
+Maraka houses: :: 2 and 7. For a dual Lagna the 7th is Badhaka, so Maraka is the 2nd only.
+Find the 1st CSL :: and its star lord.
+Take that star lord's deposition and ownership. :: Stop there.
+Test it against Maraka and Badhaka. ::
+
+T The 1st CSL's star lord signifies | Bracket (Prof. KSK)
+Both Maraka and Badhaka | Short: under 33
+Either one | Medium: 33 to 66
+Neither | Long: over 66
+
+# Roles in the later steps
+T -
+Badhaka | The deliverer. It sets the Dasa.
+Maraka | The giver. It sets the Bhukti.
+
+# Safeguards in the procedure
+T -
+Time sweep | Re-test five minutes either side. If the bracket flips, abstain.
+Conflict | If the bracket and the running Dasa disagree, treat the bracket as suspect.
+
+C Disclose only a clean "long". Otherwise abstain and refer to an experienced astrologer.
+P Sir's own terms are "completion of life" and "danger to life". [[C-10]] has the wording for clients.
+F Class 008 longevity digest steps 1 to 8, category map rows 12a to 12e, longevity engine notes.
+> L-05 C-10
+
+@D-07 | deep | Fortuna: choosing a good day | A sensitive point that brings fortune when the Sun or Moon lights it up.
+C Fortuna = Lagna + Moon − Sun
+P Fortuna improves the matters of the house it occupies. Act when the Moon or the Sun transits the Fortuna star, or any other star owned by the same star lord.
+T Grade | Condition
+5 star | Sun and Moon both in the Fortuna star. Always a new-moon day.
+4 star | Sun in the Fortuna star; Moon in another star of the same lord.
+3 star | Sun in another star of the lord; Moon in the Fortuna star.
+2 star | Sun and Moon both in other stars of the lord.
+1 star | Moon in the Fortuna star; Sun in none of the lord's stars.
+
+T -
+How often | A Fortuna day about once a month. 4 star about once a year. 5 star about once in two years.
+The orb | Does not apply to Fortuna. It is judged by exact position.
+Practice | Keep a Fortuna calendar for each family member.
+
+# Starting to repay a loan: any one of
+S
+Moon in Ashwini, Lagna in Aries. ::
+Moon in Anuradha, Lagna in Scorpio. ::
+Chaturthi or Chaturdashi tithi, :: on a Tuesday, Saturday or Sunday.
+
+# Never on an eclipse day
+P Borrow or lend money. Sign an insurance paper. Sign a property agreement. Conceive a child.
+P The notes frame the loan rule as a traditional electional remedy, not financial advice.
+F Class 006 Fortuna digest, sections A and B.
+
+@D-08 | deep | Gemstones: which planet to strengthen | Not every chart gets a gem.
+S
+Study the birth chart. :: A planet's sub lord rarely changes within 5 to 10 minutes, so a slightly wrong time does not change the gem.
+List the benefic planets: :: sub lord in 1, 2, 3, 10 or 11. The 6th is dropped for gems, because 6 is disease.
+Remove afflicted planets: :: 6, 8 or 12 anywhere in ABCD. Exception: 6, 8, 12 only at D is fine for a tenanted planet.
+Choose the gem :: for a planet that is benefic and unafflicted. It boosts that planet's houses, mainly A and B.
+
+# The gem for each planet
+T Planet | Gem | Planet | Gem
+Sun | Ruby | Venus | Diamond
+Moon | Pearl | Saturn | Blue Sapphire
+Mars | Red Coral | Rahu | Hessonite
+Mercury | Emerald | Ketu | Cat's Eye
+Jupiter | Yellow Sapphire | |
+
+# Points to say
+T -
+Rahu and Ketu | Each is judged on its own. Ketu is not added just because it opposes a benefic Rahu.
+Weight and metal | Any metal, no specific weight, about one carat at least.
+A wrong gem | A gem for the wrong chart can drain.
+No planet passes | Then no gem.
+
+P Example. Only Mars, Rahu and Ketu are benefic. Rahu has 12 at C, Ketu has 8 at B. Mars (A 11, B 2) passes: Red Coral.
+P Numerology, mantra, yantra and vastu are also in the notes. They are not covered here.
+F Bootcamp Class 12, gemstone rule and gem table.
+> L-12 L-10
+
+@B-01 | back | Open points register | Every point that is still open, in one place. Nothing here is decided.
+# Items left for the owner (from the 20 Nov 2026 check)
+T Item | Versions on file | Pages
+Vehicle houses | Class 005 and Class 6 deck: 2, 4, 9, 11. Prashna cheat sheet: 2, 4, 6, 9, 11 with 9 a must. | [[L-07]] [[Q-00]] [[M-07]]
+House houses | Class 005: 2, 4, 11. Prashna table: 2, 4, 6, 11. Krish Sir, November: 1, 2, 4, 6, 11. | [[L-07]] [[M-07]]
+Unhappy married life | Class 7 slide: 1, 6, 8, 10, 12. Class 9 voice and Toolkit: also 4. | [[Q-00]] [[M-02]]
+Job or business | Older playbook: 6 or 8 job; 7, 10 or 11 business. Krish Sir, November: star lord in 6 job, in 7 business. | [[M-05]]
+
+# Open points carried on the pages
+T Point | Status | Page
+L1 to L4 ranking order | Fitted from the app's table; not confirmed by Sir. | [[L-10]]
+Affliction: A or B, or the whole ABCD | Class 10 wins where they differ. | [[L-12]]
+Marriage: promise and timing houses | Provisional reading. | [[C-04]]
+Ruling Planets for birth charts and Prashna alike | To confirm with Sir. | [[C-06]]
+Node-ladder link and genuineness | Tool flags as doubtful. | [[P-03]]
+Divorce row | Toolkit 1, 6, 10, 12 against Class 9's 6, 8, 12. Both shown. | [[M-02]]
+6 = 3 for a job | Soft yes per Class 4; tool change awaits approval. | [[M-04]]
+Doctorate or PhD | Four questions await Sir. | [[M-06]]
+House purchase | KSK 4, 11, 12 against RVA 4, 9, 11. Run both. | [[M-07]]
+Self against opponent in court | Older playbook layer. | [[M-09]]
+Punarpoo age | "About 32.5" against "after 33". | [[D-01]]
+Punarpoo rule 7, sub-lord version | Under Sir's research; not released. | [[D-02]]
+Temperament leaving two candidates | Separate by dated events. | [[D-04]]
+Cross-rules and tie-break ladder | Astrosecrets layer, below Sir's classes. | [[C-03]]
+
+F Compiled from the "Open or judgment" notes on the pages and the poster check of 20 Nov 2026.
+
+@B-02 | back | About this guide | What it is, where it comes from and what changed.
+T -
+What it is | A study aid built from the KP Master Posters: 49 posters reorganised for a beginner, with a home page, finders, search and pop-ups.
+Edition | Draft v0.1, 20 Nov 2026. A final edition is planned at the end of the Diploma.
+Sources | Prof. Krish Murali Eswar's class decks and digests, the Prashna cheat sheet, the TFU Toolkit, and the faculty's rulings of 11–19 Nov 2026, as cited at the foot of each page.
+Not a source of truth | The class material is. Where this guide and the class differ, the class wins.
+New pages | Home, the chart checklist [[C-01]], the worked example [[C-08]], the equation finder [[E-01]] and the open points register [[B-01]]. They add navigation and one deck example; no new rule.
+
+# Corrections carried from the poster check
+T Page | Correction
+[[M-03]] | Miscarriage: Mars, Sun or Ketu; Rahu only when tied to Mars.
+[[M-08]] | Visa application: 3, 6, 9, 11; the Toolkit row adds 12.
+[[P-06]] | Direction list: Jupiter and Ketu NE.
+[[D-05]] | Method A: one direction is enough.
+[[D-06]] | Heading matched to the six rows.
+
+# Not yet verified
+P The Higher Diploma class digests (Classes 2, 3, 4), the Prashna Cheat Sheet v3 and the category map rows were not available for the check. Rows that rest only on those were compared with the November rulings where one existed.
+F Poster check and change note of 20 Nov 2026.
+
+</script>
+<script>
+(function(){
+var VERSION='Draft v0.1 · 20 Nov 2026';
+var RIDER='For educational purposes only — not a definitive prediction. For an actual prediction, consult Prof. Krish Murali Eswar, or a well-known, experienced KP astrologer.';
+var GROUPS=[['learn','Learn in order'],['chart','Read a chart'],['prashna','Prashna'],['ask','Find a question'],['deep','Deep dives'],['back','Back matter']];
+var GNAME={};GROUPS.forEach(function(g){GNAME[g[0]]=g[1]});
+var TERMS=[
+['Cuspal Sub Lord','The sub lord of a cusp. The gate for that house\'s matters.'],
+['CSL','Cuspal Sub Lord: the sub lord of a cusp. The gate for that house\'s matters.'],
+['primary cusp','The one cusp that answers the question.'],
+['star lord','The lord of the star a planet sits in. The planet gives its star lord\'s results.'],
+['sub lord','The lord of the sub a planet or cusp sits in. It qualifies and shows nature.'],
+['deposition','The house a planet occupies, after applying the orb.'],
+['ownership','The houses whose cusps fall in the planet\'s signs. Rahu and Ketu own none.'],
+['orb','The planet\'s reach: Sun 6°40′, others 3°20′.'],
+['ABCD','Star lord\'s deposition, own deposition, star lord\'s ownership, own ownership.'],
+['L1','Strength levels L1 to L4 of a planet for a house, used for periods. L1 is strongest.'],
+['untenanted','No planet sits in any of this planet\'s three stars.'],
+['Untenanted','No planet sits in any of this planet\'s three stars.'],
+['tenanted','Some planet sits in one of this planet\'s three stars.'],
+['equation','The CSL\'s result written as "house = deposition (ownership)".'],
+['afflicted','Activating 6, 8 or 12.'],
+['benefic','Sub lord in 1, 2, 3, 6, 10, 11. Judged by the house of the planet\'s sub lord. For periods only.'],
+['malefic','Sub lord in 4, 5, 7, 8, 9, 12. It lacks the power to improve life in its period. For periods only.'],
+['barren signs','Aries, Gemini, Leo, Virgo.'],
+['barren sign','Aries, Gemini, Leo, Virgo are the barren signs.'],
+['fruitful star','A star whose lord signifies the matter\'s good houses. Used for the Sun–Moon timing table.'],
+['Maraka','Houses 2 and 7.'],
+['Badhaka','11th, 9th or 7th, for a movable, fixed or dual Lagna.'],
+['Punarpoo','A Moon–Saturn link that delays marriage until about 33 unless the Sun cancels it.'],
+['oddity','An out-of-the-ordinary love or marriage, shown by Saturn on the CSL.'],
+['duality','A Mercury or Jupiter signature on the CSL. Needed for a second marriage.'],
+['Ruling Planets','The seven lords of the moment of judgement. For timing only.'],
+['Fortuna','Lagna + Moon − Sun. Used to choose a good day.'],
+['Dasa','Major period, the first of four levels: Dasa, Bhukti, Antara, Sukshma.'],
+['Bhukti','Sub-period, the second level under the Dasa.'],
+['Antara','The third period level, under the Bhukti.'],
+['Sukshma','The fourth period level, under the Antara.'],
+['Lagna','The Ascendant: the 1st cusp of the chart.'],
+['Prashna','A horary chart: one direct question, one random number from 1 to 249, one chart.'],
+['horary number','A random number from 1 to 249 that fixes the Lagna.'],
+['KPDP','The ten-step marriage-matching method.'],
+['Gochara','Transit-based prediction. Not used in KP; transits only time a promised event.']
+];
+var TDEF={};TERMS.forEach(function(t){TDEF[t[0]]=t[1]});
+var TRE=new RegExp('(^|[^A-Za-z])('+TERMS.map(function(t){return t[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}).sort(function(a,b){return b.length-a.length}).join('|')+')(?![A-Za-z])','g');
+
+// ---------- parse ----------
+var pages=[],byId={};
+(function(){
+ var L=document.getElementById('src').textContent.split('\n'),p=null,mode=null,blk=null;
+ function cells(s){return s.replace(/\[\[([^\]]*)\]\]/g,function(m){return m.replace(/\|/g,'\u0001')}).trim().split(/\s*\|\s*/).map(function(c){return c.replace(/\u0001/g,'|')})}
+ L.forEach(function(raw){
+  var s=raw.replace(/\s+$/,'');
+  if(s===''){mode=null;return}
+  if(mode==='T'){blk.r.push(cells(s));return}
+  if(mode==='S'||mode==='K'){var i=s.indexOf('::');blk.r.push(i<0?[s,'']:[s.slice(0,i).trim(),s.slice(i+2).trim()]);return}
+  var c=s.charAt(0),rest=s.slice(2);
+  if(c==='@'){var a=s.slice(1).split(' | ');p={id:a[0].trim(),g:a[1],title:a[2],sub:a[3]||'',b:[],flow:[]};pages.push(p);byId[p.id]=p}
+  else if(!p){}
+  else if(s==='S'||s==='K'){blk={t:s,r:[]};p.b.push(blk);mode=s}
+  else if(c==='T'&&s.charAt(1)===' '){blk={t:'T',h:rest.trim()==='-'?null:cells(rest),r:[]};p.b.push(blk);mode='T'}
+  else if(c==='>'){p.flow=rest.trim().split(/\s+/)}
+  else if('#PCOF'.indexOf(c)>=0&&s.charAt(1)===' '){p.b.push({t:c,x:rest})}
+ });
+})();
+var ORDER=pages.map(function(p){return p.id});
+
+// ---------- render ----------
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function inline(s,seen){
+ return s.split(/(\[\[[^\]]+\]\])/).map(function(part){
+  var m=part.match(/^\[\[([^\]|]+)(?:\|([^\]]+))?\]\]$/);
+  if(m){var t=byId[m[1]];return '<a href="#'+m[1]+'">'+esc(m[2]||(t?m[1]+' '+t.title.split(':')[0]:m[1]))+'</a>'}
+  var e=esc(part);
+  if(!seen)return e;
+  return e.replace(TRE,function(all,pre,term){if(seen[term.toLowerCase()])return all;seen[term.toLowerCase()]=1;return pre+'<span class="term" data-t="'+term+'">'+term+'</span>'});
+ }).join('');
+}
+function body(p){
+ var seen=(p.id==='L-01'||p.id==='L-02')?null:{},h='';
+ p.b.forEach(function(b){
+  if(b.t==='#')h+='<h2>'+inline(b.x,null)+'</h2>';
+  else if(b.t==='P')h+='<p>'+inline(b.x,seen)+'</p>';
+  else if(b.t==='C')h+='<div class="call">'+inline(b.x,null)+'</div>';
+  else if(b.t==='O')h+='<div class="open"><b>Open or judgment:</b> '+inline(b.x,seen)+'</div>';
+  else if(b.t==='F')h+='<div class="src">From the notes: '+inline(b.x,null)+'<div class="rider">'+VERSION+' · '+RIDER+'</div></div>';
+  else if(b.t==='T'){
+   var pair=b.h&&b.h.length===4&&b.h[0]===b.h[2];
+   h+='<table>'+(b.h?'<tr>'+b.h.map(function(c){return '<th>'+esc(c)+'</th>'}).join('')+'</tr>':'');
+   b.r.forEach(function(r){h+='<tr>'+r.map(function(c,i){return '<td'+(pair&&i===2?' class="lab"':'')+'>'+inline(c,i?seen:null)+'</td>'}).join('')+'</tr>'});
+   h+='</table>';
+  }
+  else if(b.t==='S')h+='<ol class="steps">'+b.r.map(function(r){return '<li><b>'+inline(r[0],null)+'</b> '+inline(r[1],seen)+'</li>'}).join('')+'</ol>';
+  else if(b.t==='K')h+='<div class="cards">'+b.r.map(function(r){return '<div class="card"><b>'+inline(r[0],null)+'</b>'+inline(r[1],seen)+'</div>'}).join('')+'</div>';
+ });
+ return h;
+}
+function head(p){return '<div class="kick">'+esc(GNAME[p.g])+' · '+p.id+'</div><h1>'+esc(p.title)+'</h1><p class="sub">'+esc(p.sub)+'</p>'}
+function flowIds(p){var out=[p.id];p.flow.forEach(function(f){if(byId[f]&&out.indexOf(f)<0)out.push(f)});return out}
+function pageHtml(p){
+ var i=ORDER.indexOf(p.id),pv=byId[ORDER[i-1]],nx=byId[ORDER[i+1]],fl=flowIds(p).slice(1);
+ var h=head(p)+'<div class="tools"><button data-act="page">Download this page</button>'+(fl.length?'<button data-act="flow">Download this flow ('+(fl.length+1)+' pages)</button>':'')+'<button data-act="link">Copy link</button></div>'+body(p);
+ if(fl.length)h+='<div class="deeper"><b>Go deeper from here:</b><br>'+fl.map(function(f){return '<a href="#'+f+'"><b>'+f+'</b>'+esc(byId[f].title)+'</a>'}).join('')+'</div>';
+ h+='<div class="pn">'+(pv?'<a class="chip" href="#'+pv.id+'">← '+pv.id+' '+esc(pv.title.split(':')[0])+'</a>':'<span></span>')+(nx?'<a class="chip" href="#'+nx.id+'">'+nx.id+' '+esc(nx.title.split(':')[0])+' →</a>':'<span></span>')+'</div>';
+ return h;
+}
+function homeHtml(){
+ var h='<div class="kick">KP Master Guide · '+VERSION+'</div><h1>Where do you want to start?</h1><p class="sub">A beginner\'s guide to reading a KP chart, built from the class posters. Search above, or pick a door.</p>';
+ h+='<div class="doors"><a class="door" href="#L-01"><b>I am new</b><span>Learn in order. Start with the words, then the lords, houses, orb and the chain.</span></a>'+
+ '<a class="door" href="#C-01"><b>I have a chart</b><span>The checklist, the promise gate and one worked example, start to verdict.</span></a>'+
+ '<a class="door" href="#Q-00"><b>I have a question</b><span>Will I marry? Will I get a job? Find the cusp and its yes and no houses.</span></a>'+
+ '<a class="door" href="#E-01"><b>What does this equation mean?</b><span>7 = 6, 6 = 3, 12 = 12 and other single equations in one table.</span></a>'+
+ '<a class="door" href="#P-01"><b>I have a Prashna</b><span>The eleven steps, rotation, genuineness and the re-ask rule.</span></a>'+
+ '<a class="door" href="#B-01"><b>What is still open?</b><span>Every unsettled point in one register.</span></a></div>';
+ GROUPS.forEach(function(g){h+='<h2>'+g[1]+'</h2><div>'+pages.filter(function(p){return p.g===g[0]}).map(function(p){return '<a class="chip" href="#'+p.id+'"><b style="color:var(--teal);margin-right:6px">'+p.id+'</b>'+esc(p.title.split(':')[0])+'</a>'}).join('')+'</div>'});
+ h+='<div class="src">'+pages.length+' pages. Tap a dotted word for its meaning. Each page can be downloaded alone or with the pages it leads to.<div class="rider">'+RIDER+'</div></div>';
+ return h;
+}
+// ---------- search ----------
+function norm(s){return s.toLowerCase().replace(/\s*=\s*/g,'=').replace(/\[\[([^\]|]+)\|?([^\]]*)\]\]/g,'$2 ').replace(/\s+/g,' ')}
+var IDX=pages.map(function(p){var t=[];p.b.forEach(function(b){if(b.x)t.push(b.x);if(b.h)t.push(b.h.join(' '));if(b.r)b.r.forEach(function(r){t.push(r.join(' — '))})});return {p:p,title:norm(p.id+' '+p.title+' '+p.sub),lines:t.map(function(x){return x.replace(/\[\[([^\]|]+)\|?([^\]]*)\]\]/g,function(m,a,b){return b||a})})}});
+function searchHtml(q){
+ var toks=norm(q).split(' ').filter(Boolean),res=[];
+ IDX.forEach(function(e){var sc=0,snip='',ok=true;var all=e.title+' '+norm(e.lines.join(' '));
+  toks.forEach(function(t){if(all.indexOf(t)<0)ok=false;if(e.title.indexOf(t)>=0)sc+=5});if(!ok)return;
+  e.lines.forEach(function(l){var n=norm(l),c=0;toks.forEach(function(t){if(n.indexOf(t)>=0)c++});if(c){sc+=c;if(!snip||c===toks.length&&snip.c<c)snip={t:l,c:c}}});
+  res.push({p:e.p,sc:sc,snip:snip?snip.t:e.p.sub});});
+ res.sort(function(a,b){return b.sc-a.sc});
+ var h='<div class="kick">Search</div><h1>'+res.length+' page'+(res.length===1?'':'s')+' for “'+esc(q)+'”</h1>';
+ if(!res.length)h+='<p class="sub">Nothing found. Try a single word, a house equation such as 7 = 6, or a page code such as M-01.</p>';
+ res.forEach(function(r){var s=esc(r.snip.length>220?r.snip.slice(0,220)+'…':r.snip);h+='<a class="hit" href="#'+r.p.id+'"><b>'+r.p.id+'</b>'+esc(r.p.title)+'<small>'+s+'</small></a>'});
+ return h;
+}
+// ---------- shell ----------
+var main=document.getElementById('main'),nav=document.getElementById('nav'),q=document.getElementById('q'),pop=document.getElementById('pop'),pr=document.getElementById('print');
+nav.innerHTML='<a href="#home">Home</a>'+GROUPS.map(function(g){return '<h4>'+g[1]+'</h4>'+pages.filter(function(p){return p.g===g[0]}).map(function(p){return '<a href="#'+p.id+'" data-id="'+p.id+'"><b>'+p.id+'</b>'+esc(p.title.split(':')[0])+'</a>'}).join('')}).join('');
+var cur=null;
+function show(){
+ var id=decodeURIComponent(location.hash.slice(1))||'home';cur=byId[id]||null;
+ main.innerHTML=cur?pageHtml(cur):homeHtml();
+ document.title=(cur?cur.id+' '+cur.title+' · ':'')+'KP Master Guide (draft)';
+ [].forEach.call(nav.querySelectorAll('a'),function(a){a.className=(cur&&a.getAttribute('data-id')===cur.id)?'on':''});
+ var on=nav.querySelector('a.on');if(on&&on.scrollIntoView)on.scrollIntoView({block:'nearest'});
+ nav.classList.remove('show');pop.style.display='none';window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',function(){q.value='';show()});
+q.addEventListener('input',function(){var v=q.value.trim();if(v.length>1){main.innerHTML=searchHtml(v);pop.style.display='none'}else show()});
+document.getElementById('menuBtn').addEventListener('click',function(){nav.classList.toggle('show')});
+function doPrint(ids){
+ pr.innerHTML=ids.map(function(id){var p=byId[id];return '<div class="pg">'+head(p)+body(p)+'</div>'}).join('');
+ var old=document.title;document.title='KP-Guide-'+ids[0]+(ids.length>1?'-flow':'');
+ setTimeout(function(){window.print();document.title=old},50);
+}
+document.addEventListener('click',function(e){
+ var t=e.target;
+ if(t.getAttribute&&t.getAttribute('data-act')&&cur){
+  var a=t.getAttribute('data-act');
+  if(a==='page')doPrint([cur.id]);else if(a==='flow')doPrint(flowIds(cur));
+  else if(a==='link'){var u=location.href;try{navigator.clipboard.writeText(u).then(function(){t.textContent='Link copied'},function(){window.prompt('Copy this link',u)})}catch(x){window.prompt('Copy this link',u)}}
+  return;
+ }
+ if(t.classList&&t.classList.contains('term')){
+  var k=t.getAttribute('data-t'),r=t.getBoundingClientRect();
+  pop.innerHTML='<b>'+esc(k)+'</b>'+esc(TDEF[k]||'')+'<br><a href="#L-01">Open the glossary</a>';
+  pop.style.display='block';
+  var x=Math.min(r.left+window.scrollX,window.scrollX+document.documentElement.clientWidth-pop.offsetWidth-10);
+  pop.style.left=Math.max(8,x)+'px';pop.style.top=(r.bottom+window.scrollY+6)+'px';return;
+ }
+ if(!pop.contains(t))pop.style.display='none';
+});
+show();
+})();
+</script></body></html>
